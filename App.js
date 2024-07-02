@@ -75,7 +75,7 @@ export default function App() {
             headerStyle: { backgroundColor: "#3c0a6b", height: 50 },
             headerTintColor: "white",
             tabBarActiveTintColor: "#3c0a6b",
-            headerTitle: "테스트(더미)",
+            headerTitle: "테스트(더미2)",
           }}
         >
           <BottomTab.Screen
