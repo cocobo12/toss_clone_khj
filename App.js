@@ -1,22 +1,25 @@
 import { StatusBar } from "expo-status-bar";
+import { View, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Foundation } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
+// 아이콘, 스타일링
+import { Ionicons } from "@expo/vector-icons";
+import BellIcon from "./assets/icons/bell-44.svg";
 import IconButton from "./components/UI/IconButton";
 import { Colors } from "./constants/colors";
 
-import WelcomeScreen from "./screens/WelcomeScreen";
+// 컴포넌트
+import WelcomeScreen from "./components/PlaceComponets/WelcomeScreen";
+import Home from "./screens/Home";
 import FundScreen from "./screens/FundScreen";
-import AllPlaces from "./screens/AllPlaces";
-import AddPlace from "./screens/AddPlace";
-import Map from "./screens/Map";
+import Map from "./components/PlaceComponets/Map";
 
 const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -35,32 +38,29 @@ function MainPage() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: Colors.primary500 },
-        headerTintColor: Colors.gray700,
-        contentStyle: { backgroundColor: Colors.gray700 },
+        headerStyle: { backgroundColor: Colors.black, height: 60 },
+        headerTintColor: "white",
+        tabBarActiveTintColor: "#3c0a6b",
+        headerTitle: "toss",
+        headerLeft: () => {
+          return <Ionicons name="home" size={24} color="white" />;
+        },
+        headerRight: () => {
+          return (
+            <View style={styles.homeHeaderRight}>
+              <Ionicons
+                name="home"
+                size={24}
+                color="white"
+                style={styles.searchIcon}
+              />
+              <BellIcon width={24} height={24} fill="white" />
+            </View>
+          );
+        },
       }}
     >
-      <Stack.Screen
-        name="AllPlaces"
-        component={AllPlaces}
-        options={({ navigation }) => ({
-          title: "Favorite Places",
-          headerRight: ({ tintColor }) => (
-            <IconButton
-              icon="add"
-              size={24}
-              color={tintColor}
-              onPress={() => navigation.navigate("AddPlace")}
-            />
-          ),
-        })}
-      />
-      <Stack.Screen
-        name="AddPlace"
-        component={AddPlace}
-        options={{ title: "Add a new Place" }}
-      />
-      <Stack.Screen name="Map" component={Map} />
+      <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>
   );
 }
@@ -72,10 +72,7 @@ export default function App() {
       <NavigationContainer>
         <BottomTab.Navigator
           screenOptions={{
-            headerStyle: { backgroundColor: "#3c0a6b", height: 50 },
-            headerTintColor: "white",
-            tabBarActiveTintColor: "#3c0a6b",
-            headerTitle: "테스트(더미)",
+            headerShown: false
           }}
         >
           <BottomTab.Screen
@@ -132,3 +129,13 @@ export default function App() {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  homeHeaderRight: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  searchIcon: {
+    marginRight: 10,
+  },
+});
