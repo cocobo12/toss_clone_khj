@@ -17,14 +17,17 @@ import { Colors } from "./constants/colors";
 
 // 컴포넌트
 import WelcomeScreen from "./components/PlaceComponets/WelcomeScreen";
-import Home from "./screens/Home";
+import Home from "./screens/Home/Home";
 import FundScreen from "./screens/FundScreen";
 import Map from "./components/PlaceComponets/Map";
 
+// 네비게이션
 const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();
-
 const Stack = createNativeStackNavigator();
+
+// 스토어
+import BankBooksContextProvider from "./store/context/BankBooks-context";
 
 function DrawerNavigator() {
   return (
@@ -38,7 +41,7 @@ function MainPage() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: Colors.black, height: 60 },
+        headerStyle: { backgroundColor: Colors.black, height: 50 },
         headerTintColor: "white",
         tabBarActiveTintColor: "#3c0a6b",
         headerTitle: "toss",
@@ -58,6 +61,7 @@ function MainPage() {
             </View>
           );
         },
+        contentStyle: { backgroundColor: Colors.black },
       }}
     >
       <Stack.Screen name="Home" component={Home} />
@@ -69,63 +73,66 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <BottomTab.Navigator
-          screenOptions={{
-            headerShown: false
-          }}
-        >
-          <BottomTab.Screen
-            name="홈"
-            component={MainPage}
-            options={{
-              tabBarIcon: ({ color, size }) => (
-                <Foundation name="home" size={size} color={color} />
-              ),
+      <BankBooksContextProvider>
+        <NavigationContainer>
+          <BottomTab.Navigator
+            screenOptions={{
+              headerShown: false,
+              tabBarStyle: { height: 50, backgroundColor: Colors.grayComp },
             }}
-          />
-          <BottomTab.Screen
-            name="혜택"
-            component={FundScreen}
-            options={{
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons
-                  name="diamond"
-                  size={size}
-                  color={color}
-                />
-              ),
-            }}
-          />
-          <BottomTab.Screen
-            name="토스페이"
-            component={WelcomeScreen}
-            options={{
-              tabBarIcon: ({ color, size }) => (
-                <Ionicons name="bag" size={size} color={color} />
-              ),
-            }}
-          />
-          <BottomTab.Screen
-            name="주식"
-            component={FundScreen}
-            options={{
-              tabBarIcon: ({ color, size }) => (
-                <Entypo name="area-graph" size={size} color={color} />
-              ),
-            }}
-          />
-          <BottomTab.Screen
-            name="전체"
-            component={WelcomeScreen}
-            options={{
-              tabBarIcon: ({ color, size }) => (
-                <Foundation name="list" color={color} size={size} />
-              ),
-            }}
-          />
-        </BottomTab.Navigator>
-      </NavigationContainer>
+          >
+            <BottomTab.Screen
+              name="홈"
+              component={MainPage}
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Foundation name="home" size={size} color={color} />
+                ),
+              }}
+            />
+            <BottomTab.Screen
+              name="혜택"
+              component={FundScreen}
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <MaterialCommunityIcons
+                    name="diamond"
+                    size={size}
+                    color={color}
+                  />
+                ),
+              }}
+            />
+            <BottomTab.Screen
+              name="토스페이"
+              component={WelcomeScreen}
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Ionicons name="bag" size={size} color={color} />
+                ),
+              }}
+            />
+            <BottomTab.Screen
+              name="주식"
+              component={FundScreen}
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Entypo name="area-graph" size={size} color={color} />
+                ),
+              }}
+            />
+            <BottomTab.Screen
+              name="전체"
+              component={WelcomeScreen}
+              options={{
+                tabBarIcon: ({ color, size }) => (
+                  <Foundation name="list" color={color} size={size} />
+                ),
+              }}
+            />
+          </BottomTab.Navigator>
+        </NavigationContainer>
+      </BankBooksContextProvider>
     </>
   );
 }
