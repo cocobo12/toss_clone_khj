@@ -1,8 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../constants/colors";
-import BankBook from "../../models/BankBook";
 import CustomIcons from "../UI/CustomIcons";
-import PrimaryButton from "../Button/PrimaryButton";
+import NoEffectButton from "../Button/noEffectButton";
 
 function BankBookItem({ bankbook, onSelect }) {
   console.log(bankbook);
@@ -19,12 +18,16 @@ function BankBookItem({ bankbook, onSelect }) {
         ]}
       >
         <View style={styles.innerContainer}>
-          <CustomIcons name={bankbook.name} />
-          <View>
-            <Text style={styles.title}>{bankbook.title}</Text>
-            <Text style={styles.total}>{bankbook.total}</Text>
+          <View style={styles.iconTitleContainer}>
+            <CustomIcons name={bankbook.name} />
+            <View style={styles.textContainer}>
+              <Text style={styles.title}>{bankbook.title}</Text>
+              <Text style={styles.total}>{bankbook.total}</Text>
+            </View>
           </View>
-          <PrimaryButton>송금</PrimaryButton>
+          <View style={styles.noEffect}>
+            <NoEffectButton color={Colors.brightGray}>hi</NoEffectButton>
+          </View>
         </View>
       </Pressable>
     </View>
@@ -36,11 +39,23 @@ export default BankBookItem;
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
-    marginVertical: 3,
+    marginVertical: 2,
+    borderRadius: 12,
+    overflow: "hidden",
   },
   innerContainer: {
     flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 15,
+  },
+  iconTitleContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  textContainer: {
+    marginLeft: 5,
   },
   title: {
     color: Colors.brightGray,
@@ -55,5 +70,9 @@ const styles = StyleSheet.create({
   },
   buttonPressed: {
     opacity: 0.5,
+  },
+  noEffect: {
+    alignItems: "flex-end",
+    paddingVertical: 10
   },
 });
