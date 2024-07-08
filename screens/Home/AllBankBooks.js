@@ -5,7 +5,7 @@ function AllBankBooks({ bankbooks }) {
   return (
     <View style={styles.outerContainer}>
       <BankBookList bankbooks={bankbooks} />
-      <PrimaryButton> hahah</PrimaryButton>
+      <PrimaryButton> 내 계좌 대출 증권 포인트 보기 </PrimaryButton>
     </View>
   );
 }

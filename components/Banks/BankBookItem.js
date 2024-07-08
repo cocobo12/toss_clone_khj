@@ -1,12 +1,20 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../constants/colors";
 import CustomIcons from "../UI/CustomIcons";
-import NoEffectButton from "../Button/noEffectButton";
+import SilenceButton from "../Button/SilenceButton";
 
 function BankBookItem({ bankbook, onSelect }) {
   console.log(bankbook);
   console.log(bankbook.title);
   console.log(bankbook.name);
+
+  let button = "";
+  if (bankbook.title === "저축예금" || bankbook.title === "토스뱅크 통장") {
+    button = "송금";
+  } else if (bankbook.title === "토스뱅크에 쌓인 이자") {
+    button = "지금 받기";
+  }
+
   return (
     <View style={styles.outerContainer}>
       <Pressable
@@ -26,7 +34,11 @@ function BankBookItem({ bankbook, onSelect }) {
             </View>
           </View>
           <View style={styles.noEffect}>
-            <NoEffectButton color={Colors.brightGray}>hi</NoEffectButton>
+            {bankbook.buttonOn ? (
+              <SilenceButton color={Colors.brightGray}>{button}</SilenceButton>
+            ) : (
+              ""
+            )}
           </View>
         </View>
       </Pressable>
@@ -39,7 +51,7 @@ export default BankBookItem;
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
-    marginVertical: 2,
+    marginVertical: 1,
     borderRadius: 12,
     overflow: "hidden",
   },
@@ -47,7 +59,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 15,
+    paddingHorizontal: 14,
+    paddingVertical: 6,
   },
   iconTitleContainer: {
     flexDirection: "row",
@@ -59,7 +72,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: Colors.brightGray,
-    fontSize: 12,
+    fontSize: 14,
   },
   total: {
     color: "white",
@@ -72,7 +85,8 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   noEffect: {
+    flex: 1,
     alignItems: "flex-end",
-    paddingVertical: 10
+    paddingVertical: 8,
   },
 });
