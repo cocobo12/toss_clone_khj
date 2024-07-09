@@ -1,28 +1,24 @@
 import { StyleSheet, View } from "react-native";
-import BankBookList from "../../components/Banks/BankBookList";
-import PrimaryButton from "../../components/Button/PrimaryButton";
+import CardList from "../../components/Cards/CardList";
+
 import { Colors } from "../../constants/colors";
 
-function AllBankBooks({ bankbooks }) {
+function AllCardInfo({ cards }) {
   const arrow = " 〉";
 
   return (
     <View style={styles.outerContainer}>
-      <BankBookList bankbooks={bankbooks} />
-      <View style={styles.line}>
-        <PrimaryButton textColor={Colors.buttonTextGray}>
-          내 계좌 · 대출 · 증권 · 포인트 보기 {arrow}
-        </PrimaryButton>
-      </View>
+      <CardList cards={cards} />
     </View>
   );
 }
 
-export default AllBankBooks;
+export default AllCardInfo;
 
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
+    //paddingHorizontal: 5,
   },
   line: {
     borderTopColor: Colors.pressedGray, // 선의 색상

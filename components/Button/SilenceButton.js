@@ -1,7 +1,7 @@
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import { Colors } from "../../constants/colors";
 
-function SilenceButton({ children, color }) {
+function SilenceButton({ children, color, textColor }) {
   function pressHandler() {
     console.log("noEffect!");
   }
@@ -14,7 +14,14 @@ function SilenceButton({ children, color }) {
     >
       <Pressable onPress={pressHandler} style={styles.button}>
         <View style={styles.innerContainer}>
-          <Text style={styles.buttonText}>{children}</Text>
+          <Text
+            style={[
+              styles.buttonText,
+              { color: textColor ? textColor : "white" },
+            ]}
+          >
+            {children}
+          </Text>
         </View>
       </Pressable>
     </View>
@@ -32,7 +39,7 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    paddingVertical: 4,
+    paddingVertical: 3,
   },
   buttonPressed: {
     opacity: 0.5,
@@ -42,11 +49,10 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     // alignItems: "center",
     paddingVertical: 4,
-    paddingHorizontal: 10,
+    paddingHorizontal: 12,
   },
   buttonText: {
-    color: "white",
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: "bold",
   },
 });

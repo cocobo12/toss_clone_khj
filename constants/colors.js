@@ -12,4 +12,6 @@ export const Colors = {
   grayComp: "#121212",
   pressedGray: "#303030",
   brightGray: "#606060",
+  noEffectGray: "#3e3e3e",
+  buttonTextGray: "#cacaca",
 };

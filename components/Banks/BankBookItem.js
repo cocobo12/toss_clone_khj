@@ -35,7 +35,12 @@ function BankBookItem({ bankbook, onSelect }) {
           </View>
           <View style={styles.noEffect}>
             {bankbook.buttonOn ? (
-              <SilenceButton color={Colors.brightGray}>{button}</SilenceButton>
+              <SilenceButton
+                color={Colors.noEffectGray}
+                textColor={Colors.buttonTextGray}
+              >
+                {button}
+              </SilenceButton>
             ) : (
               ""
             )}

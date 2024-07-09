@@ -1,7 +1,16 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { Colors } from "../../constants/colors";
 
-function PrimaryButton({ children, color, textColor, innerStyle }) {
+import BellIcon from "../../assets/icons/bell-44.svg";
+
+function RecommendButton({
+  children,
+  color,
+  textColor,
+  innerStyle,
+  secondLine,
+}) {
+  let second = secondLine ? secondLine : "";
   function pressHandler() {
     console.log("Pressed!");
   }
@@ -21,13 +30,25 @@ function PrimaryButton({ children, color, textColor, innerStyle }) {
         ]}
       >
         <View style={[styles.innerContainer, innerStyle]}>
+          <View style={styles.buttonContainer}>
+            <Text
+              style={[
+                styles.buttonText,
+                { color: textColor ? textColor : "white" },
+              ]}
+            >
+              {children}
+            </Text>
+            <BellIcon width={24} height={24} fill="white" />
+          </View>
+
           <Text
             style={[
               styles.buttonText,
               { color: textColor ? textColor : "white" },
             ]}
           >
-            {children}
+            {second}
           </Text>
         </View>
       </Pressable>
@@ -35,13 +56,15 @@ function PrimaryButton({ children, color, textColor, innerStyle }) {
   );
 }
 
-export default PrimaryButton;
+export default RecommendButton;
 
 const styles = StyleSheet.create({
   gridItem: {
     flex: 1,
     elvation: 4,
     borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#404040",
     overflow: "hidden",
     marginTop: 3,
   },
@@ -53,13 +76,19 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     borderRadius: 12,
-    paddingVertical: 20,
+    paddingVertical: 12,
     paddingHorizontal: 14,
   },
   buttonText: {
     color: "white",
-    fontSize: 15,
+    fontSize: 13,
     fontWeight: "bold",
-    textAlign: "center",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  iconStyle: {
+    color: "white",
   },
 });
