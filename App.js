@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -11,7 +11,9 @@ import { Entypo } from "@expo/vector-icons";
 
 // 아이콘, 스타일링
 import { Ionicons } from "@expo/vector-icons";
+import TossLogo from "./assets/icons/tosslogo.svg";
 import BellIcon from "./assets/icons/bell-44.svg";
+import FaceLogo from "./assets/icons/face.svg";
 import IconButton from "./components/UI/IconButton";
 import { Colors } from "./constants/colors";
 
@@ -41,23 +43,20 @@ function MainPage() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: Colors.black, height: 50 },
-        headerTintColor: "white",
+        headerStyle: { backgroundColor: Colors.black, height: 40 },
+        headerTintColor: "#7f7d7d",
         tabBarActiveTintColor: "#3c0a6b",
-        headerTitle: "toss",
+        headerTitle: () => <Text style={styles.headerTitle}> toss</Text>,
         headerLeft: () => {
-          return <Ionicons name="home" size={24} color="white" />;
+          return <TossLogo width={32} height={30} />;
         },
         headerRight: () => {
           return (
             <View style={styles.homeHeaderRight}>
-              <Ionicons
-                name="home"
-                size={24}
-                color="white"
-                style={styles.searchIcon}
-              />
-              <BellIcon width={24} height={24} fill="white" />
+              <View style={styles.facelogo}>
+                <FaceLogo width={30} height={30} />
+              </View>
+              <BellIcon width={28} height={28} fill="#7f7d7d" />
             </View>
           );
         },
@@ -79,6 +78,7 @@ export default function App() {
             screenOptions={{
               headerShown: false,
               tabBarStyle: { height: 50, backgroundColor: Colors.grayComp },
+              tabBarActiveTintColor: "#FFFFFF",
             }}
           >
             <BottomTab.Screen
@@ -144,5 +144,13 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     marginRight: 10,
+  },
+  headerTitle: {
+    color: "#7f7d7d",
+    fontSize: 25, // 원하는 크기로 변경
+    fontWeight: "bold",
+  },
+  facelogo: {
+    marginRight: 14,
   },
 });

@@ -3,6 +3,7 @@ import { Colors } from "../../constants/colors";
 import BellIcon from "../../assets/icons/bell-44.svg";
 
 function RecommendElement() {
+  const arrow = " 〉";
   function pressHandler() {
     console.log("Pressed!");
   }
@@ -21,9 +22,7 @@ function RecommendElement() {
             <BellIcon width={24} height={24} fill="white" />
             <Text style={styles.innerText}>내 신용점수</Text>
           </View>
-          <View style={styles.innerColorText}>
-            <Text>dd</Text>
-          </View>
+          <Text style={styles.arrow}>{arrow}</Text>
         </View>
       </Pressable>
     </View>
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 8,
   },
   iconTitle: {
     flexDirection: "row",
@@ -61,5 +60,9 @@ const styles = StyleSheet.create({
   innerColorText: {
     backgroundColor: "white",
     marginRight: 5,
+  },
+  arrow: {
+    color: Colors.buttonTextGray,
+    fontWeight: "bold",
   },
 });

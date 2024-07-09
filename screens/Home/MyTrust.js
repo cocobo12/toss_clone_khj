@@ -11,13 +11,28 @@ function MyTrust() {
         {<View style={styles.line} />}
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
-            <PrimaryButton innerStyle={styles.smallButton}>hahaa</PrimaryButton>
+            <PrimaryButton
+              innerStyle={styles.smallButton}
+              textColor={Colors.buttonTextGray}
+            >
+              계좌개설
+            </PrimaryButton>
           </View>
           <View style={styles.button}>
-            <PrimaryButton innerStyle={styles.smallButton}>hahaa</PrimaryButton>
+            <PrimaryButton
+              innerStyle={styles.smallButton}
+              textColor={Colors.buttonTextGray}
+            >
+              카드발급
+            </PrimaryButton>
           </View>
           <View style={styles.button}>
-            <PrimaryButton innerStyle={styles.smallButton}>hahaa</PrimaryButton>
+            <PrimaryButton
+              innerStyle={styles.smallButton}
+              textColor={Colors.buttonTextGray}
+            >
+              대출받기
+            </PrimaryButton>
           </View>
         </View>
       </View>
