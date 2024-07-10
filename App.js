@@ -72,6 +72,7 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
+
       <BankBooksContextProvider>
         <NavigationContainer>
           <BottomTab.Navigator
