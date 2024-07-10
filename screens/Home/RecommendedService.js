@@ -13,19 +13,21 @@ function RecommendedService() {
         <Text style={styles.titleText}>김형준님을 위해 준비했어요</Text>
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
-            <RecommendButton color="#232323">카드론 받기</RecommendButton>
+            <RecommendButton color="#232323" icon="내보험">
+              내 보험
+            </RecommendButton>
           </View>
           <View style={styles.button}>
-            <RecommendButton color="#232323" secondLine="찾기">
+            <RecommendButton color="#232323" icon="내대출" secondLine="찾기">
               내게 맞는 대출
             </RecommendButton>
           </View>
         </View>
-        
+
         <View>
-          <RecommendElement />
-          <RecommendElement />
-          <RecommendElement />
+          <RecommendElement icon="브랜드콘" content="토스 브랜드콘" />
+          <RecommendElement icon="소비줄이기" content="이번 달 소비 줄이기" />
+          <RecommendElement icon="머니알림" content="머니 알림" />
         </View>
 
         {<View style={styles.line} />}
@@ -73,6 +75,9 @@ const styles = StyleSheet.create({
 
   titleText: {
     color: "white",
-    padding: 12,
+    padding: 14,
+    fontWeight: "bold",
+    marginBottom: -4,
+    marginLeft: -4,
   },
 });

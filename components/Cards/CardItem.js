@@ -25,10 +25,17 @@ function CardItem({ card, index, onSelect }) {
         >
           <View style={styles.innerContainer}>
             <View style={styles.iconTitleContainer}>
-              <CustomIcons name={card.name} />
+              <View style={styles.icon}>
+                <CustomIcons name={card.name} />
+              </View>
               <View style={styles.textContainer}>
                 <Text style={styles.title}>{card.title}</Text>
-                <Text style={styles.total}>{card.total}</Text>
+                <View style={styles.totalSubContainer}>
+                  <Text style={styles.total}>{card.total}</Text>
+                  <Text style={styles.subTitle}>
+                    {card.subTitle ? card.subTitle : ""}
+                  </Text>
+                </View>
               </View>
             </View>
             <View style={styles.noEffect}>
@@ -83,12 +90,21 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   title: {
-    color: Colors.brightGray,
-    fontSize: 14,
+    color: Colors.buttonTextGray,
+    fontSize: 12,
   },
   total: {
     color: "white",
+    fontFamily: "Pretendard",
     fontSize: 20,
+  },
+  subTitle: {
+    color: "white",
+    fontFamily: "Pretendard",
+    fontSize: 20,
+  },
+  totalSubContainer: {
+    flexDirection: "row",
   },
   button: {
     flex: 1,
@@ -100,5 +116,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "flex-end",
     paddingVertical: 8,
+  },
+  icon: {
+    marginLeft: -6,
   },
 });

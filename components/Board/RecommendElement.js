@@ -1,8 +1,9 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../constants/colors";
 import BellIcon from "../../assets/icons/bell-44.svg";
+import CustomIcons from "../UI/CustomIcons";
 
-function RecommendElement() {
+function RecommendElement({ icon, content }) {
   const arrow = " 〉";
   function pressHandler() {
     console.log("Pressed!");
@@ -19,8 +20,8 @@ function RecommendElement() {
       >
         <View style={styles.innerContainer}>
           <View style={styles.iconTitle}>
-            <BellIcon width={24} height={24} fill="white" />
-            <Text style={styles.innerText}>내 신용점수</Text>
+            <CustomIcons name={icon} />
+            <Text style={styles.innerText}>{content}</Text>
           </View>
           <Text style={styles.arrow}>{arrow}</Text>
         </View>
@@ -55,7 +56,8 @@ const styles = StyleSheet.create({
   },
   innerText: {
     color: Colors.buttonTextGray,
-    marginLeft: 8,
+    marginLeft: 2,
+    marginTop: 5,
   },
   innerColorText: {
     backgroundColor: "white",

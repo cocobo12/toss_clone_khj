@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../constants/colors";
 import BellIcon from "../../assets/icons/bell-44.svg";
+import CustomIcons from "../UI/CustomIcons";
 
 function TrustElement() {
   const arrow = " 〉";
@@ -20,7 +21,7 @@ function TrustElement() {
       >
         <View style={styles.innerContainer}>
           <View style={styles.iconTitle}>
-            <BellIcon width={24} height={24} fill="white" />
+            <CustomIcons name="신용점수" />
             <Text style={styles.innerText}>내 신용점수</Text>
           </View>
           <View style={styles.innerColorText}>
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
   },
   innerText: {
     color: Colors.buttonTextGray,
-    marginLeft: 8,
+    marginLeft: -5,
   },
   innerColorText: {
     backgroundColor: Colors.validButton,

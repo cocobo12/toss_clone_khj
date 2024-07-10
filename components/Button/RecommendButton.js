@@ -2,6 +2,7 @@ import { View, Text, Pressable, StyleSheet } from "react-native";
 import { Colors } from "../../constants/colors";
 
 import BellIcon from "../../assets/icons/bell-44.svg";
+import CustomIcons from "../UI/CustomIcons";
 
 function RecommendButton({
   children,
@@ -9,6 +10,7 @@ function RecommendButton({
   textColor,
   innerStyle,
   secondLine,
+  icon,
 }) {
   let second = secondLine ? secondLine : "";
   function pressHandler() {
@@ -29,27 +31,32 @@ function RecommendButton({
           pressed ? styles.buttonPressed : null,
         ]}
       >
-        <View style={[styles.innerContainer, innerStyle]}>
-          <View style={styles.buttonContainer}>
+        <View style={styles.outerContainer}>
+          <View style={[styles.innerContainer, innerStyle]}>
+            <View style={styles.textContainer}>
+              <Text
+                style={[
+                  styles.buttonText,
+                  { color: textColor ? textColor : "white" },
+                ]}
+              >
+                {children}
+              </Text>
+            </View>
+
             <Text
               style={[
                 styles.buttonText,
                 { color: textColor ? textColor : "white" },
               ]}
             >
-              {children}
+              {second}
             </Text>
-            <BellIcon width={24} height={24} fill="white" />
           </View>
-
-          <Text
-            style={[
-              styles.buttonText,
-              { color: textColor ? textColor : "white" },
-            ]}
-          >
-            {second}
-          </Text>
+          
+          <View style={styles.icon}>
+            <CustomIcons name={icon} />
+          </View>
         </View>
       </Pressable>
     </View>
@@ -74,6 +81,10 @@ const styles = StyleSheet.create({
   buttonPressed: {
     opacity: 0.5,
   },
+  outerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   innerContainer: {
     borderRadius: 12,
     paddingVertical: 12,
@@ -84,11 +95,14 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "bold",
   },
-  buttonContainer: {
+  textContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
   iconStyle: {
     color: "white",
+  },
+  icon: {
+    marginTop: 8,
   },
 });

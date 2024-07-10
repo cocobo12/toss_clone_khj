@@ -18,6 +18,7 @@ function MyTrust() {
               계좌개설
             </PrimaryButton>
           </View>
+          <View style={styles.verticalLine} />
           <View style={styles.button}>
             <PrimaryButton
               innerStyle={styles.smallButton}
@@ -26,6 +27,7 @@ function MyTrust() {
               카드발급
             </PrimaryButton>
           </View>
+          <View style={styles.verticalLine} />
           <View style={styles.button}>
             <PrimaryButton
               innerStyle={styles.smallButton}
@@ -69,5 +71,11 @@ const styles = StyleSheet.create({
   },
   smallButton: {
     paddingVertical: 12,
+  },
+  verticalLine: {
+    width: 1, // 세로 선의 너비
+    height: 22, // 세로 선의 높이
+    marginTop: 15,
+    backgroundColor: Colors.pressedGray, // 세로 선의 색상
   },
 });
