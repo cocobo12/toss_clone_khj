@@ -2,12 +2,19 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../constants/colors";
 import CustomIcons from "../UI/CustomIcons";
 import SilenceButton from "../Button/SilenceButton";
+import { useFonts } from "expo-font";
 
 function CardItem({ card, index, onSelect }) {
   console.log(card);
   console.log(card.title);
   console.log(card.name);
   console.log(index);
+
+  const [fontsLoaded] = useFonts({
+    Pretendard: require("../../assets/fonts/static/Pretendard-Medium.otf"),
+  });
+
+  if (!fontsLoaded) return null;
 
   let button = "내역";
 
