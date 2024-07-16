@@ -21,7 +21,6 @@ import { Colors } from "./constants/colors";
 import WelcomeScreen from "./components/PlaceComponets/WelcomeScreen";
 import Home from "./screens/Home/Home";
 import FundScreen from "./screens/FundScreen";
-import Map from "./components/PlaceComponets/Map";
 
 // 네비게이션
 const Drawer = createDrawerNavigator();
@@ -29,7 +28,15 @@ const BottomTab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 // 스토어
-import BankBooksContextProvider from "./store/context/BankBooks-context";
+import BankBooksContextProvider, {
+  BottomTabContext,
+} from "./store/context/BankBooks-context";
+import MyPropertyPage from "./screens/Home/MyProperty/MyPropertyPage";
+import { useContext } from "react";
+
+function onPressFunction() {
+  console.log("haha");
+}
 
 function DrawerNavigator() {
   return (
@@ -46,6 +53,8 @@ function MainPage() {
         headerStyle: { backgroundColor: Colors.black, height: 40 },
         headerTintColor: "#7f7d7d",
         tabBarActiveTintColor: "#3c0a6b",
+        animation: "slide_from_bottom",
+        stackAnimation: "slide_from_bottom",
         headerTitle: () => <Text style={styles.headerTitle}> toss</Text>,
         headerLeft: () => {
           return <TossLogo width={32} height={30} />;
@@ -64,6 +73,20 @@ function MainPage() {
       }}
     >
       <Stack.Screen name="Home" component={Home} />
+
+      <Stack.Screen
+        name="MyPropertyPage"
+        component={MyPropertyPage}
+        options={({ navigation }) => ({
+          headerRight: () => (
+            <View>
+              <Text style={styles.propertyRight}>편집</Text>
+            </View>
+          ),
+          headerLeft: () => {},
+          headerTitle: "",
+        })}
+      />
     </Stack.Navigator>
   );
 }
@@ -74,63 +97,71 @@ export default function App() {
       <StatusBar style="light" />
       <BankBooksContextProvider>
         <NavigationContainer>
-          <BottomTab.Navigator
-            screenOptions={{
-              headerShown: false,
-              tabBarStyle: { height: 50, backgroundColor: Colors.grayComp },
-              tabBarActiveTintColor: "#FFFFFF",
-            }}
-          >
-            <BottomTab.Screen
-              name="홈"
-              component={MainPage}
-              options={{
-                tabBarIcon: ({ color, size }) => (
-                  <Foundation name="home" size={size} color={color} />
-                ),
-              }}
-            />
-            <BottomTab.Screen
-              name="혜택"
-              component={FundScreen}
-              options={{
-                tabBarIcon: ({ color, size }) => (
-                  <MaterialCommunityIcons
-                    name="diamond"
-                    size={size}
-                    color={color}
-                  />
-                ),
-              }}
-            />
-            <BottomTab.Screen
-              name="토스페이"
-              component={WelcomeScreen}
-              options={{
-                tabBarIcon: ({ color, size }) => (
-                  <Ionicons name="bag" size={size} color={color} />
-                ),
-              }}
-            />
-            <BottomTab.Screen
-              name="주식"
-              component={FundScreen}
-              options={{
-                tabBarIcon: ({ color, size }) => (
-                  <Entypo name="area-graph" size={size} color={color} />
-                ),
-              }}
-            />
-            <BottomTab.Screen
-              name="전체"
-              component={WelcomeScreen}
-              options={{
-                tabBarIcon: ({ color, size }) => (
-                  <Foundation name="list" color={color} size={size} />
-                ),
-              }}
-            />
-          </BottomTab.Navigator>
+          <BottomTabContext.Consumer>
+            {({ tabBarStyle }) => (
+              <BottomTab.Navigator
+                screenOptions={{
+                  headerShown: false,
+                  tabBarStyle: {
+                    height: 50,
+                    backgroundColor: Colors.grayComp,
+                    ...tabBarStyle,
+                  },
+                  tabBarActiveTintColor: "#FFFFFF",
+                }}
+              >
+                <BottomTab.Screen
+                  name="홈"
+                  component={MainPage}
+                  options={{
+                    tabBarIcon: ({ color, size }) => (
+                      <Foundation name="home" size={size} color={color} />
+                    ),
+                  }}
+                />
+                <BottomTab.Screen
+                  name="혜택"
+                  component={FundScreen}
+                  options={{
+                    tabBarIcon: ({ color, size }) => (
+                      <MaterialCommunityIcons
+                        name="diamond"
+                        size={size}
+                        color={color}
+                      />
+                    ),
+                  }}
+                />
+                <BottomTab.Screen
+                  name="토스페이"
+                  component={WelcomeScreen}
+                  options={{
+                    tabBarIcon: ({ color, size }) => (
+                      <Ionicons name="bag" size={size} color={color} />
+                    ),
+                  }}
+                />
+                <BottomTab.Screen
+                  name="주식"
+                  component={FundScreen}
+                  options={{
+                    tabBarIcon: ({ color, size }) => (
+                      <Entypo name="area-graph" size={size} color={color} />
+                    ),
+                  }}
+                />
+                <BottomTab.Screen
+                  name="전체"
+                  component={WelcomeScreen}
+                  options={{
+                    tabBarIcon: ({ color, size }) => (
+                      <Foundation name="list" color={color} size={size} />
+                    ),
+                  }}
+                />
+              </BottomTab.Navigator>
+            )}
+          </BottomTabContext.Consumer>
         </NavigationContainer>
       </BankBooksContextProvider>
     </>
@@ -152,5 +183,8 @@ const styles = StyleSheet.create({
   },
   facelogo: {
     marginRight: 14,
+  },
+  propertyRight: {
+    color: "white",
   },
 });
