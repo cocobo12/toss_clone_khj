@@ -16,6 +16,7 @@ import BrandCon from "../../assets/icons/brandcon.svg";
 import CardIcon from "../../assets/icons/cardicon.svg";
 import D15Icon from "../../assets/icons/d15icon.svg";
 import CompareGraph from "../../assets/icons/compareGraph.svg";
+import V from "../../assets/icons/downarrow.svg";
 
 function CustomIcons({ name, width, height }) {
   let icon = (
@@ -85,7 +86,11 @@ function CustomIcons({ name, width, height }) {
   } else if (name === "D15") {
     icon = <D15Icon width={width ? width : 50} height={height ? height : 50} />;
   } else if (name === "총자산") {
-    icon = <CompareGraph width={width} height={height} />;
+    icon = (
+      <CompareGraph width={width ? width : 50} height={height ? height : 50} />
+    );
+  } else if (name === "v") {
+    icon = <V width={width ? width : 10} height={height ? height : 10} fill="gray"/>;
   }
 
   return <View style={styles.icon}>{icon}</View>;

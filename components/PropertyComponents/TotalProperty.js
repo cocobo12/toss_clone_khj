@@ -2,9 +2,10 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import { Colors } from "../../constants/colors";
 import PrimaryButton from "../Button/PrimaryButton";
 import CustomIcons from "../UI/CustomIcons";
+import AnalyzeButton from "../Button/AnalyzeButton";
 
 function TotalProperty() {
-  const v = "⋁";
+  const v = "v";
   let total = "98,226,158";
   return (
     <View>
@@ -17,12 +18,21 @@ function TotalProperty() {
               fontSize={20}
               innerStyle={styles.innerStyle}
             >
-              {total}원
+              {total}원<Text> </Text>
+              <View>
+                <CustomIcons name="v" width={14} height={14} />
+              </View>
             </PrimaryButton>
           </View>
-          <Text style={styles.totalText}>지난달보다 196만원 늘었어요</Text>
+          <View style={styles.totalTextContainer}>
+            <Text style={styles.totalText}>지난달보다 </Text>
+            <Text style={[styles.totalText, { color: "#1f9efd" }]}>
+              196만원
+            </Text>
+            <Text style={styles.totalText}> 늘었어요</Text>
+          </View>
           <View>
-            <PrimaryButton></PrimaryButton>
+            <AnalyzeButton>분석 전체보기 〉</AnalyzeButton>
           </View>
         </View>
         <View>
@@ -56,17 +66,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   totalText: {
-    color: "white",
-  },
-  v: {
-    color: Colors.brightGray,
+    color: Colors.rowWhite,
     fontWeight: "bold",
   },
+  v: {},
   innerStyle: {
-    paddingVertical: 6,
+    flex: 1,
+    flexDirection: "row",
+    paddingLeft: 14,
+    paddingRight: 0,
+    paddingBottom: 8,
+    paddingTop: 0,
   },
   buttonContainer: {
-    paddingHorizontal: 40,
-    marginLeft: -54,
+    paddingLeft: 6,
+    paddingRight: 10,
+    paddingTop: 1,
+    paddingBottom: 2,
+    marginLeft: -20,
+    width: "105%",
   },
 });

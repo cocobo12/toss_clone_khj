@@ -15,4 +15,5 @@ export const Colors = {
   noEffectGray: "#3e3e3e",
   buttonTextGray: "#cacaca",
   validButton: "#5f482f",
+  rowWhite: "#d1d1d1",
 };
