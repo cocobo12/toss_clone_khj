@@ -1,5 +1,7 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { Colors } from "../../constants/colors";
+import { useFonts } from "expo-font";
+
 
 function PrimaryButton({
   children,
@@ -8,14 +10,22 @@ function PrimaryButton({
   fontSize,
   innerStyle,
   pageHandler,
+  gridItem,
+  buttonText,
 }) {
+
+  const [fontsLoaded] = useFonts({
+    Pretendard: require("../../assets/fonts/static/Pretendard-Medium.otf"),
+  });
+  if (!fontsLoaded) return null;
+
   function pressHandler() {
     console.log("Pressed!");
   }
   return (
     <View
       style={[
-        styles.gridItem,
+        gridItem ? gridItem : styles.gridItem,
         { backgroundColor: color ? color : Colors.grayComp },
       ]}
     >
@@ -30,7 +40,7 @@ function PrimaryButton({
         <View style={innerStyle ? innerStyle : styles.innerContainer}>
           <Text
             style={[
-              styles.buttonText,
+              buttonText ? buttonText : styles.buttonText,
               { color: textColor ? textColor : "white" },
               { fontSize: fontSize ? fontSize : 15 },
             ]}
@@ -68,5 +78,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
+    //fontFamily: "Pretendard",
   },
 });

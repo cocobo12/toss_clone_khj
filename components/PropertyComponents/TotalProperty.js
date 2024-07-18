@@ -10,13 +10,14 @@ function TotalProperty() {
   return (
     <View>
       <View style={styles.outerContainer}>
-        <View style={styles.textContainer}>
+        <View style={styles.textButtonContainer}>
           <Text style={styles.text}>총 자산</Text>
           <View style={styles.buttonContainer}>
             <PrimaryButton
               color={Colors.black}
               fontSize={20}
               innerStyle={styles.innerStyle}
+              buttonText={styles.buttonText}
             >
               {total}원<Text> </Text>
               <View>
@@ -35,8 +36,8 @@ function TotalProperty() {
             <AnalyzeButton>분석 전체보기 〉</AnalyzeButton>
           </View>
         </View>
-        <View>
-          <CustomIcons name="총자산" width={100} height={100} />
+        <View style={styles.graph}>
+          <CustomIcons name="총자산" width={110} height={110} />
         </View>
       </View>
     </View>
@@ -54,9 +55,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
-  textContainer: {
+  textButtonContainer: {
     marginTop: 30,
-    marginLeft: 15,
+    marginLeft: 18,
   },
   total: {
     color: "white",
@@ -69,7 +70,6 @@ const styles = StyleSheet.create({
     color: Colors.rowWhite,
     fontWeight: "bold",
   },
-  v: {},
   innerStyle: {
     flex: 1,
     flexDirection: "row",
@@ -85,5 +85,14 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
     marginLeft: -20,
     width: "105%",
+  },
+  graph: {
+    marginLeft: 67,
+    marginTop: 70,
+  },
+  buttonText: {
+    color: "white",
+    textAlign: "center",
+    fontFamily: "Pretendard",
   },
 });

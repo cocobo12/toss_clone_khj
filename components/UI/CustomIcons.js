@@ -17,6 +17,7 @@ import CardIcon from "../../assets/icons/cardicon.svg";
 import D15Icon from "../../assets/icons/d15icon.svg";
 import CompareGraph from "../../assets/icons/compareGraph.svg";
 import V from "../../assets/icons/downarrow.svg";
+import GrayPlus from "../../assets/icons/grayPlus.svg";
 
 function CustomIcons({ name, width, height }) {
   let icon = (
@@ -90,7 +91,13 @@ function CustomIcons({ name, width, height }) {
       <CompareGraph width={width ? width : 50} height={height ? height : 50} />
     );
   } else if (name === "v") {
-    icon = <V width={width ? width : 10} height={height ? height : 10} fill="gray"/>;
+    icon = (
+      <V width={width ? width : 10} height={height ? height : 10} fill="gray" />
+    );
+  } else if (name === "+입출금") {
+    icon = (
+      <GrayPlus width={width ? width : 50} height={height ? height : 50} />
+    );
   }
 
   return <View style={styles.icon}>{icon}</View>;

@@ -1,6 +1,4 @@
 import { createContext, useState } from "react";
-import { Colors } from "../../constants/colors";
-
 
 export const BankBooksContext = createContext({
   ids: [],
@@ -9,8 +7,8 @@ export const BankBooksContext = createContext({
 });
 
 export const BottomTabContext = createContext({
-  height: 50,
-  backgroundColor: Colors.grayComp,
+  //height: 50,
+  //backgroundColor: Colors.grayComp,
   display: "", // 초기 값 설정
   updateTabBarStyle: (newStyle) => {},
 });
@@ -18,8 +16,8 @@ export const BottomTabContext = createContext({
 function BankBooksContextProvider({ children }) {
   const [bankBookIds, setBankBookIds] = useState([]);
   const [tabBarStyle, setTabBarStyle] = useState({
-    height: 50,
-    backgroundColor: Colors.grayComp,
+    //height: 50,
+    //backgroundColor: Colors.grayComp,
     display: "", // 초기 값 설정
   });
 

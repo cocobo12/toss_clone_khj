@@ -5,28 +5,17 @@ import { Colors } from "../../constants/colors";
 import CustomIcons from "../UI/CustomIcons";
 import SilenceButton from "../Button/SilenceButton";
 
-function BankBookItem({ bankbook, onSelect }) {
-  console.log(bankbook);
-  console.log(bankbook.title);
-  console.log(bankbook.name);
-  console.log(bankbook.subTitle);
+function Item({ item, onSelect, buttonText }) {
+  console.log(item);
+  console.log(item.title);
+  console.log(item.name);
+  console.log(item.subTitle);
 
   const [fontsLoaded] = useFonts({
     Pretendard: require("../../assets/fonts/static/Pretendard-Medium.otf"),
   });
 
   if (!fontsLoaded) return null;
-
-  let button = "";
-  if (
-    bankbook.title === "저축예금" ||
-    bankbook.title === "토스뱅크 통장" ||
-    bankbook.title === "증권 · 토스증권 계좌"
-  ) {
-    button = "송금";
-  } else if (bankbook.title === "토스뱅크에 쌓인 이자") {
-    button = "지금 받기";
-  }
 
   return (
     <View style={styles.outerContainer}>
@@ -41,25 +30,33 @@ function BankBookItem({ bankbook, onSelect }) {
         <View style={styles.innerContainer}>
           <View style={styles.iconTitleContainer}>
             <View style={styles.icon}>
-              <CustomIcons name={bankbook.name} />
+              <CustomIcons name={item.name} />
             </View>
             <View style={styles.textContainer}>
-              <Text style={styles.title}>{bankbook.title}</Text>
-              <View style={styles.totalSubContainer}>
-                <Text style={styles.total}>{bankbook.total}</Text>
-                <Text style={styles.subTitle}>
-                  {bankbook.subTitle ? bankbook.subTitle : ""}
-                </Text>
-              </View>
+              {item.total ? (
+                <>
+                  <Text style={styles.title}>{item.title}</Text>
+                  <View style={styles.totalSubContainer}>
+                    <Text style={styles.total}>{item.total}</Text>
+                    <Text style={styles.subTitle}>
+                      {item.subTitle ? item.subTitle : ""}
+                    </Text>
+                  </View>
+                </>
+              ) : (
+                <>
+                  <Text style={styles.onlytitle}>{item.title}</Text>
+                </>
+              )}
             </View>
           </View>
           <View style={styles.noEffect}>
-            {bankbook.buttonOn ? (
+            {item.buttonOn ? (
               <SilenceButton
                 color={Colors.noEffectGray}
                 textColor={Colors.buttonTextGray}
               >
-                {button}
+                {buttonText}
               </SilenceButton>
             ) : (
               ""
@@ -71,7 +68,7 @@ function BankBookItem({ bankbook, onSelect }) {
   );
 }
 
-export default BankBookItem;
+export default Item;
 
 const styles = StyleSheet.create({
   outerContainer: {
@@ -91,6 +88,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+  },
+  onlytitle: {
+    color: Colors.buttonTextGray,
+    fontSize: 16,
+    fontWeight: "bold",
   },
   title: {
     color: Colors.buttonTextGray,

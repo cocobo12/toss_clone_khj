@@ -32,7 +32,12 @@ import BankBooksContextProvider, {
   BottomTabContext,
 } from "./store/context/BankBooks-context";
 import MyPropertyPage from "./screens/Home/MyProperty/MyPropertyPage";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import PrimaryButton from "./components/Button/PrimaryButton";
+import { init, insertPassbook } from "./util/database";
+
+//import AppLoading from "expo-app-loading";
+import * as SplashScreen from "expo-splash-screen";
 
 function onPressFunction() {
   console.log("haha");
@@ -80,7 +85,14 @@ function MainPage() {
         options={({ navigation }) => ({
           headerRight: () => (
             <View>
-              <Text style={styles.propertyRight}>편집</Text>
+              <PrimaryButton
+                color={Colors.black}
+                textColor={Colors.rowWhite}
+                gridItem={styles.gridItem}
+                innerStyle={styles.fixButtonStyle}
+              >
+                편집
+              </PrimaryButton>
             </View>
           ),
           headerLeft: () => {},
@@ -92,10 +104,59 @@ function MainPage() {
 }
 
 export default function App() {
+  const [dbInitialized, setDbInitialized] = useState(false);
+
+  async function initializeData() {
+    const DUMMY_BANKBOOK = [
+      new BankBook("토스뱅크 통장", "토스뱅크 통장", "원", "10,000", true),
+      new BankBook("토스뱅크 이자", "토스뱅크에 쌓인 이자", "원", "58", true),
+      new BankBook("모임통장", "모임통장", "원", "1,146,147", false),
+      new BankBook("우체국", "저축예금", "원", "50,000,000", true),
+      new BankBook("토스증권", "증권 · 토스증권 계좌", "원", "0", true),
+      new BankBook("기타자산", "기타 자산", "", "잔액 보기", false),
+    ];
+
+    const DUMMY_CARD = [
+      new Card("카드내역", "7월에 쓴 돈", "원", "538,238", true),
+      new Card("D15", "7월 25일 낼 카드값", "원", "291,810", false),
+    ];
+
+    for (let i = 0; i < DUMMY_BANKBOOK.length; i++) {
+      console.log(DUMMY_BANKBOOK[i]);
+      await insertPassbook(DUMMY_BANKBOOK[i]);
+    }
+
+    for (let i = 0; i < DUMMY_CARD.length; i++) {
+      console.log(DUMMY_CARD[i]);
+      await insertPassbook(DUMMY_CARD[i]);
+    }
+  }
+
+  useEffect(() => {
+    init()
+      .then(() => {
+        setDbInitialized(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  if (!dbInitialized) {
+    const prepare = async () => {
+      await SplashScreen.preventAutoHideAsync();
+      // Pre-load stuff, if needed
+      await SplashScreen.hideAsync();
+    };
+
+    prepare();
+  }
+
   return (
     <>
       <StatusBar style="light" />
       <BankBooksContextProvider>
+        {/* <Provider> </Provider>*/}
         <NavigationContainer>
           <BottomTabContext.Consumer>
             {({ tabBarStyle }) => (
@@ -105,9 +166,23 @@ export default function App() {
                   tabBarStyle: {
                     height: 50,
                     backgroundColor: Colors.grayComp,
+                    borderTopWidth: 1,
+                    borderColor: Colors.brightGray,
+                    borderTopStartRadius: 15,
+                    borderTopEndRadius: 15,
+                    borderLeftWidth: 0.2,
+                    borderRightWidth: 0.2,
+                    position: "absolute",
+                    overflow: "hidden",
+                    marginRight: -1,
                     ...tabBarStyle,
                   },
                   tabBarActiveTintColor: "#FFFFFF",
+                  tabBarLabelStyle: {
+                    fontSize: 11, // 텍스트 크기
+                    fontWeight: "bold", // 텍스트 굵기
+                    marginBottom: 6,
+                  },
                 }}
               >
                 <BottomTab.Screen
@@ -115,7 +190,9 @@ export default function App() {
                   component={MainPage}
                   options={{
                     tabBarIcon: ({ color, size }) => (
-                      <Foundation name="home" size={size} color={color} />
+                      <View style={styles.homeContainer}>
+                        <Foundation name="home" size={size} color={color} />
+                      </View>
                     ),
                   }}
                 />
@@ -124,11 +201,13 @@ export default function App() {
                   component={FundScreen}
                   options={{
                     tabBarIcon: ({ color, size }) => (
-                      <MaterialCommunityIcons
-                        name="diamond"
-                        size={size}
-                        color={color}
-                      />
+                      <View style={styles.iconContainer}>
+                        <MaterialCommunityIcons
+                          name="diamond"
+                          size={size}
+                          color={color}
+                        />
+                      </View>
                     ),
                   }}
                 />
@@ -137,7 +216,9 @@ export default function App() {
                   component={WelcomeScreen}
                   options={{
                     tabBarIcon: ({ color, size }) => (
-                      <Ionicons name="bag" size={size} color={color} />
+                      <View style={styles.iconContainer}>
+                        <Ionicons name="bag" size={size} color={color} />
+                      </View>
                     ),
                   }}
                 />
@@ -146,7 +227,9 @@ export default function App() {
                   component={FundScreen}
                   options={{
                     tabBarIcon: ({ color, size }) => (
-                      <Entypo name="area-graph" size={size} color={color} />
+                      <View style={styles.iconContainer}>
+                        <Entypo name="area-graph" size={size} color={color} />
+                      </View>
                     ),
                   }}
                 />
@@ -155,7 +238,9 @@ export default function App() {
                   component={WelcomeScreen}
                   options={{
                     tabBarIcon: ({ color, size }) => (
-                      <Foundation name="list" color={color} size={size} />
+                      <View style={styles.iconContainer}>
+                        <Foundation name="list" color={color} size={size} />
+                      </View>
                     ),
                   }}
                 />
@@ -184,7 +269,23 @@ const styles = StyleSheet.create({
   facelogo: {
     marginRight: 14,
   },
-  propertyRight: {
-    color: "white",
+  homeContainer: {
+    //position: "absolute",
+    marginBottom: -6,
+  },
+  iconContainer: {
+    marginBottom: -6,
+  },
+  gridItem: {
+    flex: 1,
+    elvation: 4,
+    borderRadius: 30,
+    overflow: "hidden",
+    marginTop: 3,
+  },
+  fixButtonStyle: {
+    borderRadius: 30,
+    paddingVertical: 8,
+    paddingHorizontal: 6,
   },
 });

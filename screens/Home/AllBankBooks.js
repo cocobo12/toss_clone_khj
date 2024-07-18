@@ -10,8 +10,9 @@ function AllBankBooks({ bankbooks }) {
   const arrow = " 〉";
 
   function pageHandler() {
-    console.log("navi");
-    navigation.navigate("MyPropertyPage");
+    console.log("올뱅크북 핸들러");
+    console.log(bankbooks);
+    navigation.navigate("MyPropertyPage", { passbooks: bankbooks });
   }
 
   return (
@@ -20,6 +21,7 @@ function AllBankBooks({ bankbooks }) {
       <View style={styles.line}>
         <PrimaryButton
           textColor={Colors.buttonTextGray}
+          innerStyle={styles.innerStyle}
           pageHandler={pageHandler}
         >
           내 계좌 · 대출 · 증권 · 포인트 보기 {arrow}
@@ -40,5 +42,10 @@ const styles = StyleSheet.create({
     borderTopWidth: 1, // 선의 두께
     marginHorizontal: 10,
     marginTop: 2, // 선과 버튼 사이의 간격
+  },
+  innerStyle: {
+    borderRadius: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 14,
   },
 });
