@@ -7,6 +7,8 @@ import BankBookList from "../../../../components/Banks/BankBookList";
 import { useFonts } from "expo-font";
 import ItemList from "../../../../components/Item/ItemList";
 import StaticItem from "../../../../models/StaticItem";
+import { useEffect, useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
 
 const addPassbook = [new StaticItem("+입출금", "입출금 · 저출계좌 추가하기")];
 
@@ -14,12 +16,29 @@ function Property({ route }) {
   const [fontsLoaded] = useFonts({
     Pretendard: require("../../../../assets/fonts/static/Pretendard-Medium.otf"),
   });
-
   if (!fontsLoaded) return null;
 
+  const [loadedPassbooks, setLoadedPassbooks] = useState([]);
+  const isFocused = useIsFocused();
+
+  // 바탐탭 숨김 (BottomTabContext 활용)
+  useEffect(() => {
+    async function loadPassbooks() {
+      const passbooks = await fetchPassbook();
+      console.log("db마이자산--------------------------");
+      console.log(passbooks.rows._array);
+      setLoadedPassbooks(passbooks.rows._array);
+    }
+
+    if (isFocused) {
+      console.log("자산페이지 loadPassbooks");
+      loadPassbooks();
+    }
+  }, [isFocused]);
+
   console.log("계좌내역데이터");
-  console.log(route.params.passbooks);
-  const bankbooks = route.params.passbooks;
+  console.log(loadedPassbooks);
+
   return (
     <ScrollView style={styles.content}>
       {/* 총자산 */}
@@ -36,7 +55,7 @@ function Property({ route }) {
       <View>
         <Text style={styles.passbookTitle}>입출금</Text>
         <View>
-          <BankBookList bankbooks={bankbooks} />
+          <BankBookList bankbooks={loadedPassbooks} />
           <ItemList items={addPassbook} />
         </View>
       </View>

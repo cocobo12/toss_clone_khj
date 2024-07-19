@@ -1,26 +1,44 @@
 import { View, Text, StyleSheet } from "react-native";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import Property from "./Tabs/Property";
 import CreateBank from "./Tabs/CreateBank";
 import FindLoan from "./Tabs/FindLoan";
 import { Colors } from "../../../constants/colors";
 import { BottomTabContext } from "../../../store/context/BankBooks-context";
+import { useIsFocused } from "@react-navigation/native";
+import { fetchPassbook } from "../../../util/database";
 
 const Tab = createMaterialTopTabNavigator();
 
-function MyPropertyPage({ route }) {
+function MyPropertyPage() {
   const { updateTabBarStyle } = useContext(BottomTabContext);
-  // 데이터 컨텍스트로 받을지, 네비게이션으로 받을지 선택사항
+  const [loadedPassbooks, setLoadedPassbooks] = useState([]);
+  const isFocused = useIsFocused();
+
   console.log("마이자산페이지");
-  console.log(route.params.passbooks);
-  const passbooks = route.params;
+  console.log(isFocused);
+
+  // 바탐탭 숨김 (BottomTabContext 활용)
   useEffect(() => {
+    async function loadPassbooks() {
+      const passbooks = await fetchPassbook();
+      console.log("db마이자산--------------------------");
+      console.log(passbooks.rows._array);
+      setLoadedPassbooks(passbooks.rows._array);
+    }
+
+    if (isFocused) {
+      console.log("자산페이지 loadPassbooks");
+      loadPassbooks();
+    }
+
     updateTabBarStyle({ display: "none" });
     return () => {
       updateTabBarStyle({ display: "" });
     };
-  }, []);
+  }, [isFocused]);
+
   return (
     <View style={styles.outerContainer}>
       <Tab.Navigator
@@ -37,7 +55,7 @@ function MyPropertyPage({ route }) {
         <Tab.Screen
           name="자산"
           component={Property}
-          initialParams={passbooks}
+          initialParams={loadedPassbooks}
         />
         <Tab.Screen name="계좌 개설" component={CreateBank} />
         <Tab.Screen name="대출 찾기" component={FindLoan} />

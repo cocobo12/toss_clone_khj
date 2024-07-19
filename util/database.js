@@ -1,22 +1,33 @@
-import * as SQLite from "expo-sqlite";
+import * as SQLite from "expo-sqlite/legacy";
 
 const database = SQLite.openDatabase("tossd.db");
 
 export function init() {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
+      // 기존 테이블을 삭제하여 초기화
       tx.executeSql(
-        `CREATE TABLE IF NOT EXISTS passbooks (
-           id INTEGER PRIMARY KEY NOT NULL,
-           name TEXT NOT NULL,
-           title TEXT,
-           subTitle TEXT,
-           total TEXT,
-           buttonOn BOOLEAN
-        )`,
+        `DROP TABLE IF EXISTS passbooks;`,
         [],
         () => {
-          resolve();
+          // 테이블 삭제 후 새로운 테이블 생성
+          tx.executeSql(
+            `CREATE TABLE IF NOT EXISTS passbooks (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              name TEXT NOT NULL,
+              title TEXT,
+              subTitle TEXT,
+              total TEXT,
+              buttonOn TEXT
+            );`,
+            [],
+            () => {
+              resolve();
+            },
+            (_, error) => {
+              reject(error);
+            }
+          );
         },
         (_, error) => {
           reject(error);
@@ -63,6 +74,7 @@ export function fetchPassbook() {
         [],
         (_, result) => {
           console.log(result);
+          console.log(result.rows);
           resolve(result);
         },
         (_, error) => {

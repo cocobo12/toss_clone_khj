@@ -11,8 +11,8 @@ function AllBankBooks({ bankbooks }) {
 
   function pageHandler() {
     console.log("올뱅크북 핸들러");
-    console.log(bankbooks);
-    navigation.navigate("MyPropertyPage", { passbooks: bankbooks });
+
+    navigation.navigate("MyPropertyPage");
   }
 
   return (

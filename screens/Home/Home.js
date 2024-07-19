@@ -25,22 +25,20 @@ function Home() {
   const [loadedPassbooks, setLoadedPassbooks] = useState([]);
 
   const isFocused = useIsFocused();
-  console.log("홈 화면");
+  console.log("useEffect후");
   console.log(isFocused);
-  console.log("useEffect전");
 
   useEffect(() => {
     async function loadPassbooks() {
       const passbooks = await fetchPassbook();
-      console.log("db통장데이터");
-      console.log(passbooks);
-      setLoadedPassbooks(passbooks);
+      console.log("db통장데이터--------------------------");
+      console.log(passbooks.rows._array);
+      setLoadedPassbooks(passbooks.rows._array);
     }
 
     if (isFocused) {
-      console.log("이펙트함수동작전");
+      console.log("홈 loadPassbooks");
       loadPassbooks();
-      //setLoadedPassbooks((curPassbooks) => [...curPassbooks, ])
     }
   }, [isFocused]);
 
