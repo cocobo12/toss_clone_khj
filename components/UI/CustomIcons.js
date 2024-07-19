@@ -18,6 +18,7 @@ import D15Icon from "../../assets/icons/d15icon.svg";
 import CompareGraph from "../../assets/icons/compareGraph.svg";
 import V from "../../assets/icons/downarrow.svg";
 import GrayPlus from "../../assets/icons/grayPlus.svg";
+import Nyunghyub from "../../assets/icons/nongicon.svg";
 
 function CustomIcons({ name, width, height }) {
   let icon = (
@@ -97,6 +98,10 @@ function CustomIcons({ name, width, height }) {
   } else if (name === "+입출금") {
     icon = (
       <GrayPlus width={width ? width : 50} height={height ? height : 50} />
+    );
+  } else if (name === "농협") {
+    icon = (
+      <Nyunghyub width={width ? width : 50} height={height ? height : 50} />
     );
   }
 

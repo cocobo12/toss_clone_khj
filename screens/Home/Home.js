@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, StyleSheet } from "react-native";
+import { View, Text, ScrollView, StyleSheet, FlatList } from "react-native";
 import PrimaryButton from "../../components/Button/PrimaryButton";
 import { Colors } from "../../constants/colors";
 import Board from "../../components/Board/Board";
@@ -10,7 +10,7 @@ import RecommendedService from "./RecommendedService";
 import TossbankButton from "../../components/Button/TossbankButton";
 import { useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
-import { fetchPassbook } from "../../util/database";
+import { fetchCards, fetchPassbook } from "../../util/database";
 
 //import { BANKBOOK, CARD } from "../../data/dummy-data";
 
@@ -23,6 +23,7 @@ const DUMMY_CARD = [
 
 function Home() {
   const [loadedPassbooks, setLoadedPassbooks] = useState([]);
+  const [loadedCards, setLoadedCards] = useState([]);
 
   const isFocused = useIsFocused();
   console.log("useEffect후");
@@ -31,40 +32,75 @@ function Home() {
   useEffect(() => {
     async function loadPassbooks() {
       const passbooks = await fetchPassbook();
-      console.log("db통장데이터--------------------------");
+      console.log("db통장 데이터--------------------------");
       console.log(passbooks.rows._array);
       setLoadedPassbooks(passbooks.rows._array);
+    }
+    async function loadCards() {
+      const cards = await fetchCards();
+      console.log("db카드 데이터--------------------------");
+      console.log(cards.rows._array);
+      setLoadedCards(cards.rows._array);
     }
 
     if (isFocused) {
       console.log("홈 loadPassbooks");
       loadPassbooks();
+      loadCards();
     }
   }, [isFocused]);
 
+  const renderItem = ({ item }) => {
+    switch (item.type) {
+      case "bankbook":
+        return (
+          <View style={styles.bankContainer}>
+            <Board type="bankbook" items={loadedPassbooks} />
+          </View>
+        );
+      case "card":
+        return (
+          <View style={styles.containerMargin}>
+            <Board type="card" items={loadedCards} />
+          </View>
+        );
+      case "myTrust":
+        return (
+          <View style={styles.containerMargin}>
+            <MyTrust />
+          </View>
+        );
+      case "recommendedService":
+        return (
+          <View style={styles.containerMargin}>
+            <RecommendedService />
+          </View>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const data = [
+    { type: "bankbook" },
+    { type: "card" },
+    { type: "myTrust" },
+    { type: "recommendedService" },
+  ];
+
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.topButton}>
-          <TossbankButton>토스뱅크</TossbankButton>
-        </View>
-        <View style={styles.bankContainer}>
-          <Board type="bankbook" items={loadedPassbooks} />
-        </View>
-
-        <View style={styles.containerMargin}>
-          <Board type="card" items={DUMMY_CARD} />
-        </View>
-
-        <View style={styles.containerMargin}>
-          <MyTrust />
-        </View>
-
-        <View>
-          <RecommendedService />
-        </View>
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.type}
+        ListHeaderComponent={
+          <View style={styles.topButton}>
+            <TossbankButton>토스뱅크</TossbankButton>
+          </View>
+        }
+      />
+    </View>
   );
 }
 

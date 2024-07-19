@@ -34,7 +34,7 @@ import BankBooksContextProvider, {
 import MyPropertyPage from "./screens/Home/MyProperty/MyPropertyPage";
 import { useContext, useEffect, useState } from "react";
 import PrimaryButton from "./components/Button/PrimaryButton";
-import { init, insertPassbook } from "./util/database";
+import { init } from "./util/database";
 
 //import AppLoading from "expo-app-loading";
 import * as SplashScreen from "expo-splash-screen";
@@ -84,10 +84,11 @@ function MainPage() {
         name="MyPropertyPage"
         component={MyPropertyPage}
         options={({ navigation }) => ({
+          headerStyle: { backgroundColor: Colors.grayblack },
           headerRight: () => (
             <View>
               <PrimaryButton
-                color={Colors.black}
+                color={Colors.grayblack}
                 textColor={Colors.rowWhite}
                 gridItem={styles.gridItem}
                 innerStyle={styles.fixButtonStyle}

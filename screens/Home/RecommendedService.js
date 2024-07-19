@@ -13,12 +13,16 @@ function RecommendedService() {
         <Text style={styles.titleText}>김형준님을 위해 준비했어요</Text>
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
-            <RecommendButton color="#232323" icon="내보험">
+            <RecommendButton color={Colors.recommendText} icon="내보험">
               내 보험
             </RecommendButton>
           </View>
           <View style={styles.button}>
-            <RecommendButton color="#232323" icon="내대출" secondLine="찾기">
+            <RecommendButton
+              color={Colors.recommendText}
+              icon="내대출"
+              secondLine="찾기"
+            >
               내게 맞는 대출
             </RecommendButton>
           </View>
@@ -32,7 +36,10 @@ function RecommendedService() {
 
         {<View style={styles.line} />}
 
-        <PrimaryButton innerStyle={styles.recommendButton}>
+        <PrimaryButton
+          innerStyle={styles.recommendButton}
+          textColor={Colors.buttonTextGray}
+        >
           추천 서비스 더보기
         </PrimaryButton>
       </View>
@@ -48,8 +55,8 @@ const styles = StyleSheet.create({
     elvation: 4,
     borderRadius: 12,
     overflow: "hidden",
-    marginHorizontal: 6,
-    marginBottom: 10,
+    marginHorizontal: 0,
+    marginBottom: 50,
   },
   innerContainer: {
     flex: 1,
@@ -70,7 +77,8 @@ const styles = StyleSheet.create({
     marginVertical: 2, // 선과 버튼 사이의 간격
   },
   recommendButton: {
-    paddingVertical: 16,
+    flex: 1,
+    paddingVertical: 12,
   },
 
   titleText: {

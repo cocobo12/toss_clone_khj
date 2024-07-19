@@ -1,24 +1,42 @@
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet, Animated } from "react-native";
 import { Colors } from "../../constants/colors";
+import React, { useRef } from "react";
 
 function AnalyzeButton({ children }) {
+  const scaleValue = useRef(new Animated.Value(1)).current;
+
   function pressHandler() {
     console.log("Pressed!");
   }
+
+  function pressInHandler() {
+    Animated.spring(scaleValue, {
+      toValue: 0.95,
+      useNativeDriver: true,
+    }).start();
+  }
+
+  function pressOutHandler() {
+    Animated.spring(scaleValue, {
+      toValue: 1,
+      useNativeDriver: true,
+    }).start();
+  }
+
   return (
     <View style={styles.outerContainer}>
       <Pressable
+        onPressIn={pressInHandler}
+        onPressOut={pressOutHandler}
         onPress={pressHandler}
         android_ripple={{
           color: Colors.pressedGray,
           borderless: false,
+          borderRadius: 30,
         }}
         style={({ pressed }) => [
           styles.container,
-          {
-            backgroundColor: pressed ? styles.buttonPressed : null,
-          },
-          { backgroundColor: Colors.noEffectGray },
+          pressed && styles.buttonPressed,
         ]}
       >
         <View style={styles.textContainer}>
@@ -46,9 +64,10 @@ const styles = StyleSheet.create({
     paddingTop: 2,
     paddingLeft: 7,
     width: "100%",
-    borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: Colors.analyzeButton,
+    //borderWidth: 0,
   },
   buttonPressed: {
     opacity: 0.5,
@@ -60,7 +79,7 @@ const styles = StyleSheet.create({
   },
   text: {
     flex: 1,
-    color: "white",
+    color: Colors.rowWhite,
     textAlign: "center",
   },
 });

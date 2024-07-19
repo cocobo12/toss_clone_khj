@@ -10,12 +10,19 @@ function Item({ item, onSelect, buttonText }) {
   console.log(item.title);
   console.log(item.name);
   console.log(item.subTitle);
+  console.log(item.buttonOn);
 
   const [fontsLoaded] = useFonts({
     Pretendard: require("../../assets/fonts/static/Pretendard-Medium.otf"),
   });
 
   if (!fontsLoaded) return null;
+
+  let button = "";
+
+  if (item.buttonOn) {
+    button = buttonText ? buttonText : item.buttonOn;
+  }
 
   return (
     <View style={styles.outerContainer}>
@@ -51,12 +58,12 @@ function Item({ item, onSelect, buttonText }) {
             </View>
           </View>
           <View style={styles.noEffect}>
-            {item.buttonOn ? (
+            {button ? (
               <SilenceButton
                 color={Colors.noEffectGray}
                 textColor={Colors.buttonTextGray}
               >
-                {buttonText}
+                {button}
               </SilenceButton>
             ) : (
               ""

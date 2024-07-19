@@ -14,7 +14,7 @@ function TotalProperty() {
           <Text style={styles.text}>총 자산</Text>
           <View style={styles.buttonContainer}>
             <PrimaryButton
-              color={Colors.black}
+              color={Colors.grayblack}
               fontSize={20}
               innerStyle={styles.innerStyle}
               buttonText={styles.buttonText}

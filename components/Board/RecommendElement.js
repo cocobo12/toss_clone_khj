@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   innerText: {
-    color: Colors.buttonTextGray,
+    color: "white",
     marginLeft: 2,
     marginTop: 5,
   },
