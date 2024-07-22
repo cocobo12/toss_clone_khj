@@ -37,7 +37,7 @@ function MyPropertyPage() {
           // content색은 material-top-tabs에서 contentStyle 속성이 존재하지않기에, 직접 컴포넌트에서 해야된다.
           //tabBarPressOpacity: 5,
           //tabBarPressColor: Colors.tabPressGray,
-          tabBarAndroidRipple: { color: Colors.pressedGray, borderless: false}
+          tabBarAndroidRipple: { color: Colors.pressedGray, borderless: false },
         }}
       >
         <Tab.Screen name="자산" component={Property} />
@@ -54,10 +54,6 @@ const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
   },
-  line: {
-    borderBottomColor: "white",
-    borderBottomWidth: 0.5,
-  },
   tabBar: {
     backgroundColor: Colors.grayblack, // 탭 바의 배경색
     borderBottomColor: Colors.tabLine,
@@ -67,8 +63,8 @@ const styles = StyleSheet.create({
   tabBarIndicator: {
     backgroundColor: "#fff", // 선택된 탭 아래의 표시기의 색상
     height: 1.5, // 표시기의 높이
-    width: "25%",
-    left: "4%",
+    width: "24%",
+    left: "5%",
   },
   tabBarLabel: {
     fontWeight: "bold",

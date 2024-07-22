@@ -5,7 +5,6 @@ import CustomIcons from "../UI/CustomIcons";
 import AnalyzeButton from "../Button/AnalyzeButton";
 
 function TotalProperty() {
-  const v = "v";
   let total = "98,226,158";
   return (
     <View>
@@ -21,7 +20,7 @@ function TotalProperty() {
             >
               {total}원<Text> </Text>
               <View>
-                <CustomIcons name="v" width={14} height={14} />
+                <CustomIcons name="v" width={12} height={12} />
               </View>
             </PrimaryButton>
           </View>
@@ -73,10 +72,10 @@ const styles = StyleSheet.create({
   innerStyle: {
     flex: 1,
     flexDirection: "row",
-    paddingLeft: 14,
+    paddingLeft: 12,
     paddingRight: 0,
     paddingBottom: 8,
-    paddingTop: 0,
+    paddingTop: 4,
   },
   buttonContainer: {
     paddingLeft: 6,

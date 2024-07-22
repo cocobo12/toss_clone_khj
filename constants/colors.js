@@ -23,4 +23,6 @@ export const Colors = {
   analyzeButton: "#2e2e2e",
   recommendText: "#232323",
   truthText: "#cac1c1",
+  collectButton: "#103363",
+  collectPress: "#0c2548",
 };

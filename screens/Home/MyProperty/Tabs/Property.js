@@ -10,11 +10,17 @@ import StaticItem from "../../../../models/StaticItem";
 import { useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
 import { fetchHidePassbook, fetchPassbook } from "../../../../util/database";
-import Board from "../../../../components/Board/Board";
 import PrimaryButton from "../../../../components/Button/PrimaryButton";
+import CustomIcons from "../../../../components/UI/CustomIcons";
+import LoanAdd from "../../../../components/PropertyComponents/Loan/LoanAdd";
+import Item from "../../../../components/Item/Item";
+import CommonButton from "../../../../components/Button/CommonButton";
+import StockAdd from "../../../../components/PropertyComponents/Stock/StockAdd";
+import PointStatic from "../../../../components/PropertyComponents/Point/PointStatic";
+import OtherProperty from "../../../../components/PropertyComponents/OtherProperty/OtherProperty";
 
 // 고정된 + 추가 컴포넌트
-const addPassbook = [new StaticItem("+입출금", "입출금 · 저출계좌 추가하기")];
+const addPassbook = new StaticItem("+입출금", "입출금 · 저출계좌 추가하기");
 
 function Property() {
   const [fontsLoaded] = useFonts({
@@ -77,7 +83,7 @@ function Property() {
             <Text style={styles.passbookTitle}>입출금</Text>
             <View>
               <ItemList items={loadedPassbooks} />
-              <ItemList items={addPassbook} />
+              <Item item={addPassbook} arrow={true} />
             </View>
           </View>
         );
@@ -92,10 +98,12 @@ function Property() {
                 <PrimaryButton
                   textColor={Colors.buttonTextGray}
                   color={Colors.grayblack}
+                  gridItem={styles.gridItem}
                   innerStyle={styles.innerButtonStyle}
                   pageHandler={pageHandler}
                 >
-                  숨긴 계좌 접기
+                  숨긴 계좌 접기<Text> </Text>
+                  <CustomIcons name="^" width={20} height={20} />
                 </PrimaryButton>
               </View>
             </View>
@@ -105,40 +113,61 @@ function Property() {
         return (
           <View style={styles.loanOuterContainer}>
             <Text style={styles.loanTitle}>대출</Text>
-            <Text>?원</Text>
-            <View></View>
-            
+            <View style={styles.loanTotalContainer}>
+              <Text style={styles.loanKeyword}>?</Text>
+              <Text style={styles.loanTotal}>원</Text>
+            </View>
+            <View>
+              <LoanAdd />
+            </View>
           </View>
         );
       case "stock":
         return (
-          <View>
-            <Text>증권</Text>
-            <Text>0원</Text>
-            <View></View>
+          <View style={styles.stockOuterContainer}>
+            <Text style={styles.stockTitleText}>증권</Text>
+            <View style={styles.stockTotalButtonContainer}>
+              <Text style={styles.stockTotalText}>0원</Text>
+              <View style={styles.collectButton}>
+                <CommonButton>모아보기</CommonButton>
+              </View>
+            </View>
+            <View style={styles.stockAddContainer}>
+              <StockAdd />
+            </View>
           </View>
         );
       case "point":
         return (
-          <View>
-            <Text>포인트 페이 머니</Text>
-            <Text>7,749원</Text>
+          <View style={styles.pointOuterContainer}>
+            <Text style={styles.pointTitleText}>포인트 · 페이 머니</Text>
+            <Text style={styles.pointTotalText}>7,749원</Text>
+            <View style={styles.pointStaticContainer}>
+              <PointStatic />
+            </View>
+            <View style={styles.lineAndBottom}>
+              <PrimaryButton
+                textColor={Colors.buttonTextGray}
+                color={Colors.grayblack}
+                gridItem={styles.gridItem}
+                innerStyle={styles.innerButtonStyle}
+                pageHandler={pageHandler}
+              >
+                숨긴 포인트 · 페이 머니 보기<Text> </Text>
+                <CustomIcons name="v" width={13} height={13} />
+              </PrimaryButton>
+            </View>
           </View>
         );
 
       case "other":
         return (
-          <View>
-            <Text>기타 자산</Text>
-            <Text>10,030,000원</Text>
-            <View></View>
-          </View>
-        );
-      case "hideOther":
-        return (
-          <View>
-            <Text>숨긴 기타 자산</Text>
-            <View></View>
+          <View style={styles.pointOuterContainer}>
+            <Text style={styles.pointTitleText}>기타 자산</Text>
+            <Text style={styles.pointTotalText}>0원</Text>
+            <View style={styles.pointStaticContainer}>
+              <OtherProperty />
+            </View>
           </View>
         );
       case "insurance":
@@ -169,7 +198,6 @@ function Property() {
           { type: "stock" },
           { type: "point" },
           { type: "other" },
-          { type: "hideOther" },
           { type: "insurance" },
           { type: "add" },
         ]}
@@ -191,10 +219,12 @@ const styles = StyleSheet.create({
   totalContainer: {
     flex: 1,
     backgroundColor: Colors.grayblack,
+    marginBottom: -1,
   },
   textOuterContainer: {
     flex: 1,
     backgroundColor: Colors.grayblack,
+    marginBottom: -1,
   },
   textContainer: {
     flex: 1,
@@ -204,6 +234,7 @@ const styles = StyleSheet.create({
   passbookOuterContainer: {
     flex: 1,
     backgroundColor: Colors.grayblack,
+    marginBottom: -1,
   },
   passbookTitle: {
     flex: 1,
@@ -227,30 +258,107 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 14,
   },
+  gridItem: {
+    flex: 1,
+    elvation: 4,
+    overflow: "hidden",
+  },
   innerButtonStyle: {
-    borderRadius: 12,
+    flex: 1,
+    borderRadius: 0,
     paddingVertical: 14,
     paddingHorizontal: 14,
+    marginBottom: 2,
   },
   lineAndBottom: {
     borderTopColor: Colors.pressedGray, // 선의 색상
     borderTopWidth: 1, // 선의 두께
-    marginHorizontal: 10,
-    marginTop: 2, // 선과 버튼 사이의 간격
-    marginBottom: 6,
+    marginTop: 8, // 선과 버튼 사이의 간격
   },
   loanOuterContainer: {
     flex: 1,
-    marginTop: 10,
+    marginTop: 14,
     backgroundColor: Colors.grayblack,
+    paddingBottom: 10,
   },
   loanTitle: {
-    flex:1,
+    flex: 1,
     color: Colors.buttonTextGray,
-    fontSize: 20,
+    fontSize: 16,
     //fontWeight: "bold",
     fontFamily: "Pretendard",
-    marginTop: 25,
-    marginLeft: 14,
+    marginTop: 20,
+    marginLeft: 18,
+  },
+  loanTotalContainer: {
+    flexDirection: "row",
+    marginTop: 4,
+    marginLeft: 18,
+  },
+  loanTotal: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  loanKeyword: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  stockOuterContainer: {
+    flex: 1,
+    marginTop: 14,
+    backgroundColor: Colors.grayblack,
+  },
+  stockTitleText: {
+    flex: 1,
+    color: Colors.buttonTextGray,
+    fontSize: 16,
+    fontFamily: "Pretendard",
+    marginTop: 20,
+    marginLeft: 18,
+  },
+  stockTotalText: {
+    color: "white",
+    fontSize: 19,
+    fontFamily: "Pretendard",
+    marginTop: 6,
+    marginLeft: 18,
+  },
+  stockTotalButtonContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  collectButton: {
+    marginRight: 16,
+  },
+  stockAddContainer: {
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  pointOuterContainer: {
+    flex: 1,
+    marginTop: 14,
+    backgroundColor: Colors.grayblack,
+  },
+  pointTitleText: {
+    flex: 1,
+    color: Colors.buttonTextGray,
+    fontSize: 16,
+    fontFamily: "Pretendard",
+    marginTop: 20,
+    marginLeft: 18,
+  },
+  pointTotalText: {
+    color: "white",
+    fontSize: 20,
+    fontFamily: "Pretendard",
+    marginTop: 4,
+    marginLeft: 18,
+  },
+  pointStaticContainer: {
+    marginTop: 18,
+    marginBottom: 10,
   },
 });

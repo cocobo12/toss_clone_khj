@@ -5,11 +5,12 @@ import { Colors } from "../../constants/colors";
 import CustomIcons from "../UI/CustomIcons";
 import SilenceButton from "../Button/SilenceButton";
 
-function Item({ item, onSelect, buttonText }) {
+function Item({ item, totalStyle, onSelect, buttonText, arrow }) {
   console.log(item);
   console.log(item.title);
   console.log(item.name);
   console.log(item.subTitle);
+  console.log(item.total);
   console.log(item.buttonOn);
 
   const [fontsLoaded] = useFonts({
@@ -44,7 +45,9 @@ function Item({ item, onSelect, buttonText }) {
                 <>
                   <Text style={styles.title}>{item.title}</Text>
                   <View style={styles.totalSubContainer}>
-                    <Text style={styles.total}>{item.total}</Text>
+                    <Text style={totalStyle ? totalStyle : styles.total}>
+                      {item.total}
+                    </Text>
                     <Text style={styles.subTitle}>
                       {item.subTitle ? item.subTitle : ""}
                     </Text>
@@ -52,7 +55,9 @@ function Item({ item, onSelect, buttonText }) {
                 </>
               ) : (
                 <>
-                  <Text style={styles.onlytitle}>{item.title}</Text>
+                  <View style={styles.singleTitleContainer}>
+                    <Text style={styles.onlytitle}>{item.title}</Text>
+                  </View>
                 </>
               )}
             </View>
@@ -65,6 +70,8 @@ function Item({ item, onSelect, buttonText }) {
               >
                 {button}
               </SilenceButton>
+            ) : arrow ? (
+              <Text style={styles.arrow}>{arrow ? " 〉" : ""}</Text>
             ) : (
               ""
             )}
@@ -83,12 +90,13 @@ const styles = StyleSheet.create({
     marginVertical: 1,
     borderRadius: 12,
     overflow: "hidden",
+    marginHorizontal: 10,
   },
   innerContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 14,
+    paddingHorizontal: 8,
     paddingVertical: 6,
   },
   iconTitleContainer: {
@@ -109,12 +117,12 @@ const styles = StyleSheet.create({
   total: {
     color: "white",
     fontFamily: "Pretendard",
-    fontSize: 20,
+    fontSize: 17,
   },
   subTitle: {
     color: "white",
     fontFamily: "Pretendard",
-    fontSize: 20,
+    fontSize: 17,
   },
   totalSubContainer: {
     flexDirection: "row",
@@ -124,6 +132,7 @@ const styles = StyleSheet.create({
   },
   buttonPressed: {
     opacity: 0.5,
+    paddingHorizontal: 6,
   },
   noEffect: {
     flex: 1,
@@ -132,5 +141,13 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginLeft: -6,
+  },
+  singleTitleContainer: {
+    flexDirection: "row",
+    //justifyContent: "flex-end",
+    alignItems: "flex-end",
+  },
+  arrow: {
+    color: "white",
   },
 });

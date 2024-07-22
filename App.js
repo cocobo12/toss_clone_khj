@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -85,6 +85,7 @@ function MainPage() {
         component={MyPropertyPage}
         options={({ navigation }) => ({
           headerStyle: { backgroundColor: Colors.grayblack },
+
           headerRight: () => (
             <View>
               <PrimaryButton
@@ -97,8 +98,14 @@ function MainPage() {
               </PrimaryButton>
             </View>
           ),
-          headerLeft: () => {},
           headerTitle: "",
+          headerLeft: () => (
+            <View style={styles.backButton}>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Ionicons name="arrow-back" size={30} color={Colors.rowWhite} />
+              </TouchableOpacity>
+            </View>
+          ),
         })}
       />
     </Stack.Navigator>
@@ -134,7 +141,7 @@ export default function App() {
       <StatusBar style="light" />
       <BankBooksContextProvider>
         {/* <Provider> </Provider>*/}
-        <NavigationContainer>
+        <NavigationContainer >
           <BottomTabContext.Consumer>
             {({ tabBarStyle }) => (
               <BottomTab.Navigator
@@ -264,5 +271,9 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     paddingVertical: 8,
     paddingHorizontal: 6,
+  },
+  backButton: {
+    marginTop: 5,
+    marginLeft: -8,
   },
 });

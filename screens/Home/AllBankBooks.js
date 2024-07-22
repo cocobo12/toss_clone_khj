@@ -40,12 +40,12 @@ const styles = StyleSheet.create({
   line: {
     borderTopColor: Colors.pressedGray, // 선의 색상
     borderTopWidth: 1, // 선의 두께
-    marginHorizontal: 10,
     marginTop: 2, // 선과 버튼 사이의 간격
   },
   innerStyle: {
+    flex: 1,
     borderRadius: 12,
     paddingVertical: 14,
-    paddingHorizontal: 14,
+    //paddingHorizontal: 14,
   },
 });

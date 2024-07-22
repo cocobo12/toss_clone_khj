@@ -19,6 +19,11 @@ import CompareGraph from "../../assets/icons/compareGraph.svg";
 import V from "../../assets/icons/downarrow.svg";
 import GrayPlus from "../../assets/icons/grayPlus.svg";
 import Nyunghyub from "../../assets/icons/nongicon.svg";
+import ArrowUpIcon from "../../assets/icons/arrowUpIcon.svg";
+import LoanPocket from "../../assets/icons/loanPocket.svg";
+import SmileCashe from "../../assets/icons/smilePoint.svg";
+import SinPoint from "../../assets/icons/sinpoint.svg";
+import { Colors } from "../../constants/colors";
 
 function CustomIcons({ name, width, height }) {
   let icon = (
@@ -74,7 +79,7 @@ function CustomIcons({ name, width, height }) {
     icon = (
       <ShildIcon width={width ? width : 30} height={height ? height : 30} />
     );
-  } else if (name === "내대출") {
+  } else if (name === "대출찾기") {
     icon = (
       <PoketSearchIcon
         width={width ? width : 30}
@@ -102,6 +107,26 @@ function CustomIcons({ name, width, height }) {
   } else if (name === "농협") {
     icon = (
       <Nyunghyub width={width ? width : 50} height={height ? height : 50} />
+    );
+  } else if (name === "^") {
+    icon = (
+      <ArrowUpIcon
+        width={width ? width : 50}
+        height={height ? height : 50}
+        fill="gray"
+      />
+    );
+  } else if (name === "대출한도") {
+    icon = (
+      <LoanPocket width={width ? width : 50} height={height ? height : 50} />
+    );
+  } else if (name === "스마일캐시") {
+    icon = (
+      <SmileCashe width={width ? width : 50} height={height ? height : 50} />
+    );
+  } else if (name === "신세계") {
+    icon = (
+      <SinPoint width={width ? width : 50} height={height ? height : 50} />
     );
   }
 
