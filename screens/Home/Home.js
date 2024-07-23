@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, StyleSheet } from "react-native";
+import { View, Text, ScrollView, StyleSheet, FlatList } from "react-native";
 import PrimaryButton from "../../components/Button/PrimaryButton";
 import { Colors } from "../../constants/colors";
 import Board from "../../components/Board/Board";
@@ -8,16 +8,13 @@ import Card from "../../models/Card";
 import MyTrust from "./MyTrust";
 import RecommendedService from "./RecommendedService";
 import TossbankButton from "../../components/Button/TossbankButton";
+import { useEffect, useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
+import { fetchCards, fetchPassbook } from "../../util/database";
+
+//import { BANKBOOK, CARD } from "../../data/dummy-data";
 
 //const DUMMY_LOGO = "C:RN\toss_v2\toss_clone_khjassetsicons\bell-44.svg";
-const DUMMY_BANKBOOK = [
-  new BankBook("토스뱅크 통장", "토스뱅크 통장", "원", "10,000", true),
-  new BankBook("토스뱅크 이자", "토스뱅크에 쌓인 이자", "원", "58", true),
-  new BankBook("모임통장", "모임통장", "원", "1,146,147", false),
-  new BankBook("우체국", "저축예금", "원", "50,000,000", true),
-  new BankBook("토스증권", "증권 · 토스증권 계좌", "원", "0", true),
-  new BankBook("기타자산", "기타 자산", "", "잔액 보기", false),
-];
 
 const DUMMY_CARD = [
   new Card("카드내역", "7월에 쓴 돈", "원", "538,238", true),
@@ -25,29 +22,85 @@ const DUMMY_CARD = [
 ];
 
 function Home() {
+  const [loadedPassbooks, setLoadedPassbooks] = useState([]);
+  const [loadedCards, setLoadedCards] = useState([]);
+
+  const isFocused = useIsFocused();
+  console.log("useEffect후");
+  console.log(isFocused);
+
+  useEffect(() => {
+    async function loadPassbooks() {
+      const passbooks = await fetchPassbook();
+      console.log("db통장 데이터--------------------------");
+      console.log(passbooks.rows._array);
+      setLoadedPassbooks(passbooks.rows._array);
+    }
+    async function loadCards() {
+      const cards = await fetchCards();
+      console.log("db카드 데이터--------------------------");
+      console.log(cards.rows._array);
+      setLoadedCards(cards.rows._array);
+    }
+
+    if (isFocused) {
+      console.log("홈 loadPassbooks");
+      loadPassbooks();
+      loadCards();
+    }
+  }, [isFocused]);
+
+  const renderItem = ({ item }) => {
+    switch (item.type) {
+      case "bankbook":
+        return (
+          <View style={styles.bankContainer}>
+            <Board type="bankbook" items={loadedPassbooks} />
+          </View>
+        );
+      case "card":
+        return (
+          <View style={styles.containerMargin}>
+            <Board type="card" items={loadedCards} />
+          </View>
+        );
+      case "myTrust":
+        return (
+          <View style={styles.containerMargin}>
+            <MyTrust />
+          </View>
+        );
+      case "recommendedService":
+        return (
+          <View style={styles.containerMargin}>
+            <RecommendedService />
+          </View>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const data = [
+    { type: "bankbook" },
+    { type: "card" },
+    { type: "myTrust" },
+    { type: "recommendedService" },
+  ];
+
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.topButton}>
-          <TossbankButton>토스뱅크</TossbankButton>
-        </View>
-        <View style={styles.bankContainer}>
-          <Board type="bankbook" items={DUMMY_BANKBOOK} />
-        </View>
-
-        <View style={styles.containerMargin}>
-          <Board type="card" items={DUMMY_CARD} />
-        </View>
-
-        <View style={styles.containerMargin}>
-          <MyTrust />
-        </View>
-
-        <View>
-          <RecommendedService />
-        </View>
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.type}
+        ListHeaderComponent={
+          <View style={styles.topButton}>
+            <TossbankButton>토스뱅크</TossbankButton>
+          </View>
+        }
+      />
+    </View>
   );
 }
 
@@ -56,6 +109,7 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginRight: -3,
   },
   bankContainer: {
     marginVertical: 12,

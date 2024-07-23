@@ -6,14 +6,26 @@ export const BankBooksContext = createContext({
   removeBankBook: (id) => {},
 });
 
+export const BottomTabContext = createContext({
+  //height: 50,
+  //backgroundColor: Colors.grayComp,
+  display: "", // 초기 값 설정
+  updateTabBarStyle: (newStyle) => {},
+});
+
 function BankBooksContextProvider({ children }) {
   const [bankBookIds, setBankBookIds] = useState([]);
+  const [tabBarStyle, setTabBarStyle] = useState({
+    //height: 50,
+    //backgroundColor: Colors.grayComp,
+    display: "", // 초기 값 설정
+  });
 
   function addBankBook(id) {
     setBankBookIds((currentBkIds) => [...currentBkIds, id]);
   }
 
-  function removeBankBook() {
+  function removeBankBook(id) {
     setBankBookIds((currentBkIds) =>
       currentBkIds.filter((bkIds) => bkIds !== id)
     );
@@ -25,9 +37,15 @@ function BankBooksContextProvider({ children }) {
     removeBankBook: removeBankBook,
   };
 
+  function updateTabBarStyle(newStyle) {
+    setTabBarStyle(newStyle);
+  }
+
   return (
     <BankBooksContext.Provider value={value}>
-      {children}
+      <BottomTabContext.Provider value={{ tabBarStyle, updateTabBarStyle }}>
+        {children}
+      </BottomTabContext.Provider>
     </BankBooksContext.Provider>
   );
 }

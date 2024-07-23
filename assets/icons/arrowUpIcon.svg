@@ -1,0 +1,13 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0,0,256,256">
+  <g fill="none" fill-rule="evenodd" stroke="#969696" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+    <g transform="translate(0, 50)"> <!-- 여기에서 Y축으로 10단위 이동 -->
+      <g transform="scale(10.66667,10.66667)">
+        <g id="Iconly/Two-tone/Arrow---Up-2">
+          <g transform="translate(19,15.5) rotate(-180)" id="Arrow---Up-2">
+            <path d="M14,0l-7,7l-7,-7" id="Stroke-1"></path>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

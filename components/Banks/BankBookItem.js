@@ -10,6 +10,8 @@ function BankBookItem({ bankbook, onSelect }) {
   console.log(bankbook.title);
   console.log(bankbook.name);
   console.log(bankbook.subTitle);
+  console.log(bankbook.buttonOn);
+  console.log(bankbook.status);
 
   const [fontsLoaded] = useFonts({
     Pretendard: require("../../assets/fonts/static/Pretendard-Medium.otf"),
@@ -18,15 +20,12 @@ function BankBookItem({ bankbook, onSelect }) {
   if (!fontsLoaded) return null;
 
   let button = "";
-  if (
-    bankbook.title === "저축예금" ||
-    bankbook.title === "토스뱅크 통장" ||
-    bankbook.title === "증권 · 토스증권 계좌"
-  ) {
-    button = "송금";
-  } else if (bankbook.title === "토스뱅크에 쌓인 이자") {
-    button = "지금 받기";
+
+  if (bankbook.buttonOn) {
+    button = bankbook.buttonOn;
   }
+
+
 
   return (
     <View style={styles.outerContainer}>
@@ -54,7 +53,7 @@ function BankBookItem({ bankbook, onSelect }) {
             </View>
           </View>
           <View style={styles.noEffect}>
-            {bankbook.buttonOn ? (
+            {button ? (
               <SilenceButton
                 color={Colors.noEffectGray}
                 textColor={Colors.buttonTextGray}
@@ -95,6 +94,7 @@ const styles = StyleSheet.create({
   title: {
     color: Colors.buttonTextGray,
     fontSize: 12,
+    fontWeight: "bold",
   },
   total: {
     color: "white",

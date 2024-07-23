@@ -9,10 +9,8 @@ function Board({ type, items }) {
   console.log(type);
   let outputItems;
   if (type === "bankbook") {
-    console.log("뱅크북타입넘어옴");
     outputItems = <AllBankBooks bankbooks={items} />;
   } else if (type === "card") {
-    console.log("카드타입넘어옴");
     outputItems = <AllCardInfo cards={items} />;
   }
 

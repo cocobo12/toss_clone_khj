@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   innerText: {
-    color: Colors.buttonTextGray,
+    color: Colors.truthText,
     marginLeft: -5,
   },
   innerColorText: {

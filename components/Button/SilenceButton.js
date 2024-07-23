@@ -40,6 +40,8 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     paddingVertical: 3,
+    //paddingBottom: 6,
+    //paddingTop: 2,
   },
   buttonPressed: {
     opacity: 0.5,
@@ -49,10 +51,10 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     // alignItems: "center",
     paddingVertical: 4,
-    paddingHorizontal: 12,
+    paddingHorizontal: 14,
   },
   buttonText: {
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: "bold",
   },
 });

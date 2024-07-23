@@ -1,30 +1,48 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { Colors } from "../../constants/colors";
+import { useFonts } from "expo-font";
 
-function PrimaryButton({ children, color, textColor, innerStyle }) {
+
+function PrimaryButton({
+  children,
+  color,
+  textColor,
+  fontSize,
+  innerStyle,
+  pageHandler,
+  gridItem,
+  buttonText,
+}) {
+
+  const [fontsLoaded] = useFonts({
+    Pretendard: require("../../assets/fonts/static/Pretendard-Medium.otf"),
+  });
+  if (!fontsLoaded) return null;
+
   function pressHandler() {
     console.log("Pressed!");
   }
   return (
     <View
       style={[
-        styles.gridItem,
+        gridItem ? gridItem : styles.gridItem,
         { backgroundColor: color ? color : Colors.grayComp },
       ]}
     >
       <Pressable
-        onPress={pressHandler}
+        onPress={pageHandler ? pageHandler : pressHandler}
         android_ripple={{ color: Colors.pressedGray, borderless: false }}
         style={({ pressed }) => [
           styles.button,
           pressed ? styles.buttonPressed : null,
         ]}
       >
-        <View style={[styles.innerContainer, innerStyle]}>
+        <View style={innerStyle ? innerStyle : styles.innerContainer}>
           <Text
             style={[
-              styles.buttonText,
+              buttonText ? buttonText : styles.buttonText,
               { color: textColor ? textColor : "white" },
+              { fontSize: fontSize ? fontSize : 15 },
             ]}
           >
             {children}
@@ -58,8 +76,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
-    fontSize: 15,
     fontWeight: "bold",
     textAlign: "center",
+    //fontFamily: "Pretendard",
   },
 });
