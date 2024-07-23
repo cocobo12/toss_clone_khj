@@ -14,13 +14,13 @@ import { Ionicons } from "@expo/vector-icons";
 import TossLogo from "./assets/icons/tosslogo.svg";
 import BellIcon from "./assets/icons/bell-44.svg";
 import FaceLogo from "./assets/icons/face.svg";
-import IconButton from "./components/UI/IconButton";
 import { Colors } from "./constants/colors";
 
 // 컴포넌트
 import WelcomeScreen from "./components/PlaceComponets/WelcomeScreen";
 import Home from "./screens/Home/Home";
 import FundScreen from "./screens/FundScreen";
+import PropertyManage from "./screens/Home/MyProperty/EditScreen/PropertyManage";
 
 // 네비게이션
 const Drawer = createDrawerNavigator();
@@ -32,7 +32,7 @@ import BankBooksContextProvider, {
   BottomTabContext,
 } from "./store/context/BankBooks-context";
 import MyPropertyPage from "./screens/Home/MyProperty/MyPropertyPage";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PrimaryButton from "./components/Button/PrimaryButton";
 import { init } from "./util/database";
 
@@ -40,8 +40,9 @@ import { init } from "./util/database";
 import * as SplashScreen from "expo-splash-screen";
 import initializeData from "./data/dummy-data";
 
-function onPressFunction() {
-  console.log("haha");
+function inputFormHandler(navigation) {
+  console.log("입풋폼으로 이동");
+  navigation.navigate("PropertyManage");
 }
 
 function DrawerNavigator() {
@@ -93,6 +94,7 @@ function MainPage() {
                 textColor={Colors.rowWhite}
                 gridItem={styles.gridItem}
                 innerStyle={styles.fixButtonStyle}
+                pageHandler={() => inputFormHandler(navigation)}
               >
                 편집
               </PrimaryButton>
@@ -108,6 +110,8 @@ function MainPage() {
           ),
         })}
       />
+
+      <Stack.Screen name="PropertyManage" component={PropertyManage} />
     </Stack.Navigator>
   );
 }
@@ -142,7 +146,7 @@ export default function App() {
 
       <BankBooksContextProvider>
         {/* <Provider> </Provider>*/}
-        <NavigationContainer >
+        <NavigationContainer>
           <BottomTabContext.Consumer>
             {({ tabBarStyle }) => (
               <BottomTab.Navigator

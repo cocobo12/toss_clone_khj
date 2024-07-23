@@ -2,7 +2,6 @@ import { View, Text, Pressable, StyleSheet } from "react-native";
 import { Colors } from "../../constants/colors";
 import { useFonts } from "expo-font";
 
-
 function PrimaryButton({
   children,
   color,
@@ -13,7 +12,6 @@ function PrimaryButton({
   gridItem,
   buttonText,
 }) {
-
   const [fontsLoaded] = useFonts({
     Pretendard: require("../../assets/fonts/static/Pretendard-Medium.otf"),
   });

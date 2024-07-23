@@ -16,10 +16,6 @@ import { fetchCards, fetchPassbook } from "../../util/database";
 
 //const DUMMY_LOGO = "C:RN\toss_v2\toss_clone_khjassetsicons\bell-44.svg";
 
-const DUMMY_CARD = [
-  new Card("카드내역", "7월에 쓴 돈", "원", "538,238", true),
-  new Card("D15", "7월 25일 낼 카드값", "원", "291,810", false),
-];
 
 function Home() {
   const [loadedPassbooks, setLoadedPassbooks] = useState([]);

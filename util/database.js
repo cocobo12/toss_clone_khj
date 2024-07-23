@@ -141,6 +141,29 @@ export function fetchHidePassbook() {
   return promise;
 }
 
+export function fetchAllPassbook() {
+  const promise = new Promise((resolve, reject) => {
+    console.log("페치함수");
+    database.transaction((tx) => {
+      tx.executeSql(
+        "SELECT * FROM passbooks",
+        [],
+        (_, result) => {
+          console.log("페치 성공:", result);
+          console.log(result.rows);
+          resolve(result);
+        },
+        (_, error) => {
+          console.error("Error fetching passbooks:", error);
+          reject(error);
+        }
+      );
+    });
+  });
+
+  return promise;
+}
+
 export function insertCard(card) {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
