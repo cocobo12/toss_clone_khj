@@ -18,6 +18,8 @@ import CommonButton from "../../../../components/Button/CommonButton";
 import StockAdd from "../../../../components/PropertyComponents/Stock/StockAdd";
 import PointStatic from "../../../../components/PropertyComponents/Point/PointStatic";
 import OtherProperty from "../../../../components/PropertyComponents/OtherProperty/OtherProperty";
+import InsuranceAdd from "../../../../components/PropertyComponents/Insurance/InsuranceAdd";
+import NewProperty from "../../../../components/PropertyComponents/NewProperty";
 
 // 고정된 + 추가 컴포넌트
 const addPassbook = new StaticItem("+입출금", "입출금 · 저출계좌 추가하기");
@@ -172,15 +174,19 @@ function Property() {
         );
       case "insurance":
         return (
-          <View>
-            <Text>보험</Text>
-            <View></View>
+          <View style={styles.insuranceOuterContainer}>
+            <Text style={styles.insuranceTitleText}>보험</Text>
+            <View style={styles.insuranceinnerContainer}>
+              <InsuranceAdd />
+            </View>
           </View>
         );
       case "add":
         return (
-          <View>
-            <View></View>
+          <View style={styles.addOuterContainer}>
+            <View>
+              <NewProperty />
+            </View>
           </View>
         );
     }
@@ -360,5 +366,27 @@ const styles = StyleSheet.create({
   pointStaticContainer: {
     marginTop: 18,
     marginBottom: 10,
+  },
+  insuranceOuterContainer: {
+    flex: 1,
+    marginTop: 14,
+    backgroundColor: Colors.grayblack,
+  },
+  insuranceTitleText: {
+    flex: 1,
+    color: Colors.buttonTextGray,
+    fontSize: 16,
+    fontFamily: "Pretendard",
+    marginTop: 20,
+    marginLeft: 18,
+  },
+  insuranceinnerContainer: {
+    marginTop: 18,
+    marginBottom: 10,
+  },
+  addOuterContainer: {
+    flex: 1,
+    marginTop: 14,
+    backgroundColor: Colors.grayblack,
   },
 });

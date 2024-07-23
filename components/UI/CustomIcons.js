@@ -23,7 +23,8 @@ import ArrowUpIcon from "../../assets/icons/arrowUpIcon.svg";
 import LoanPocket from "../../assets/icons/loanPocket.svg";
 import SmileCashe from "../../assets/icons/smilePoint.svg";
 import SinPoint from "../../assets/icons/sinpoint.svg";
-import { Colors } from "../../constants/colors";
+import BluePlus from "../../assets/icons/bluePlus.svg";
+import PassbookIcon from "../../assets/icons/passbookIcon.svg";
 
 function CustomIcons({ name, width, height }) {
   let icon = (
@@ -127,6 +128,14 @@ function CustomIcons({ name, width, height }) {
   } else if (name === "신세계") {
     icon = (
       <SinPoint width={width ? width : 50} height={height ? height : 50} />
+    );
+  } else if (name === "파란추가") {
+    icon = (
+      <BluePlus width={width ? width : 50} height={height ? height : 50} />
+    );
+  } else if (name === "계좌만들기") {
+    icon = (
+      <PassbookIcon width={width ? width : 50} height={height ? height : 50} />
     );
   }
 
