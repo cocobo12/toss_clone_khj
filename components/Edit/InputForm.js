@@ -1,8 +1,9 @@
 import { View } from "react-native";
 import Input from "./Input";
 
-function InputForm({ label, textChangeHandler, column }) {
+function InputForm({ label, textChangeHandler, column, value}) {
   console.log("키값 확인", column);
+  console.log("인풋폼의 벨류 : ", value);
   return (
     <View>
       <Input
@@ -10,6 +11,7 @@ function InputForm({ label, textChangeHandler, column }) {
         textInputConfig={{
           keyboardType: "default",
           onChangeText: (text) => textChangeHandler(column, text),
+          value: {value}
         }}
       />
       {/*  <Input 

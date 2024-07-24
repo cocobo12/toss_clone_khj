@@ -9,7 +9,7 @@ import { StyleSheet, Alert, Button, Image, View, Text } from "react-native";
 import { Colors } from "../../constants/colors";
 import OulineButton from "../UI/OutlinedButton";
 
-function ImagePicker({ onTakeImage }) {
+function ImagePicker({ column, onTakeImage }) {
   const [pickedImage, setPickedImage] = useState();
 
   const [cameraPermissionInformation, requestPermission] =
@@ -52,9 +52,9 @@ function ImagePicker({ onTakeImage }) {
 
     console.log(image);
     console.log(image.assets);
-    console.log(image.assets[0].uri);
+    console.log("이미지 uri : ", image.assets[0].uri);
     setPickedImage(image.assets[0].uri);
-    onTakeImage(image.assets[0].uri);
+    onTakeImage(column, image.assets[0].uri);
   }
 
   let imagePreview = <Text>No image taken yet.</Text>;

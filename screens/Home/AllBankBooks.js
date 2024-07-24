@@ -4,7 +4,7 @@ import PrimaryButton from "../../components/Button/PrimaryButton";
 import { Colors } from "../../constants/colors";
 import { useNavigation } from "@react-navigation/native";
 
-function AllBankBooks({ bankbooks, button }) {
+function AllBankBooks({ bankbooks, button, deleteButton }) {
   const navigation = useNavigation();
 
   const arrow = " 〉";
@@ -17,7 +17,7 @@ function AllBankBooks({ bankbooks, button }) {
 
   return (
     <View style={styles.outerContainer}>
-      <BankBookList bankbooks={bankbooks} />
+      <BankBookList bankbooks={bankbooks} deleteButton={deleteButton}/>
       {button === false ? (
         <View>
           <Text></Text>

@@ -1,10 +1,10 @@
 import { View } from "react-native";
 import ImagePicker from "../../../../components/Image/ImagePicker";
 
-function InputImage() {
+function InputImage({ column, onTakeImage }) {
     return(
         <View>
-            <ImagePicker/>
+            <ImagePicker column={column} onTakeImage={onTakeImage}/>
         </View>
     );
 }
