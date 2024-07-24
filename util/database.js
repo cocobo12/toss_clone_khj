@@ -42,7 +42,37 @@ export function init() {
                     );`,
                     [],
                     () => {
-                      resolve();
+                      // stocks 테이블 초기화
+                      tx.executeSql(
+                        `DROP TABLE IF EXISTS stocks;`,
+                        [],
+                        () => {
+                          // stocks 테이블 생성
+                          tx.executeSql(
+                            `CREATE TABLE IF NOT EXISTS stocks (
+                              id INTEGER PRIMARY KEY AUTOINCREMENT,
+                              name TEXT,
+                              title TEXT,
+                              quantity INTEGER,
+                              currentPrice REAL,
+                              subTitle TEXT,
+                              total TEXT,
+                              buttonOn TEXT,
+                              status VARCHAR(10) DEFAULT 'ACTIVE'
+                            );`,
+                            [],
+                            () => {
+                              resolve();
+                            },
+                            (_, error) => {
+                              reject(error);
+                            }
+                          );
+                        },
+                        (_, error) => {
+                          reject(error);
+                        }
+                      );
                     },
                     (_, error) => {
                       reject(error);
@@ -228,6 +258,58 @@ export function fetchHideCards() {
           resolve(result);
         },
         (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+
+  return promise;
+}
+
+export function insertStock(stock) {
+  const promise = new Promise((resolve, reject) => {
+    database.transaction((tx) => {
+      tx.executeSql(
+        `INSERT INTO stocks (name, title, quantity, currentPrice, subTitle, total, buttonOn, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        [
+          stock.name,
+          stock.title,
+          stock.quantity,
+          stock.currentPrice,
+          stock.subTitle,
+          stock.total,
+          stock.buttonOn,
+          stock.status || "ACTIVE",
+        ],
+        (_, result) => {
+          console.log("주식 insert쿼리 성공", result);
+          resolve(result);
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+
+  return promise;
+}
+
+export function fetchStocks() {
+  const promise = new Promise((resolve, reject) => {
+    console.log("페치주식함수");
+    database.transaction((tx) => {
+      tx.executeSql(
+        "SELECT * FROM stocks WHERE status = 'ACTIVE'",
+        [],
+        (_, result) => {
+          console.log("페치 주식 성공:", result);
+          console.log(result.rows);
+          resolve(result);
+        },
+        (_, error) => {
+          console.error("Error fetching stocks:", error);
           reject(error);
         }
       );

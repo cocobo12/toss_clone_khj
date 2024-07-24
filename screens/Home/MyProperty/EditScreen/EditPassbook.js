@@ -14,6 +14,11 @@ function EditPassbook() {
   console.log("useEffect후");
   console.log(isFocused);
 
+  function passbookSubmit(passbook) {
+    console.log("계좌 서밋 데이터 : ", passbook);
+    return passbook;
+  }
+
   useEffect(() => {
     async function loadPassbooks() {
       const passbooks = await fetchAllPassbook();
@@ -33,14 +38,7 @@ function EditPassbook() {
       case "newPassbook":
         return (
           <View style={styles.itemContainer}>
-            <InputPassbook />
-          </View>
-        );
-
-      case "button":
-        return (
-          <View style={styles.buttonContainer}>
-            <PrimaryButton color={Colors.analyzeButton} fontSize={18}>등록</PrimaryButton>
+            <InputPassbook submitHandler={passbookSubmit} />
           </View>
         );
 
@@ -55,11 +53,7 @@ function EditPassbook() {
   return (
     <View style={styles.content}>
       <FlatList
-        data={[
-          { type: "newPassbook" },
-          { type: "button" },
-          { type: "passbookList" },
-        ]}
+        data={[{ type: "newPassbook" }, { type: "passbookList" }]}
         renderItem={renderItem}
         keyExtractor={(item, index) => item.type + index}
         showsVerticalScrollIndicator={false}
