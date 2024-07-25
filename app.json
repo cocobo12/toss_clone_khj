@@ -1,23 +1,23 @@
 {
   "expo": {
-    "name": "TossClone",
+    "name": "토스",
     "slug": "TossClone",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/Toss_App_Icon.png",
+    "icon": "./assets/tossicon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash/tossAuthSlash2.png",
       "resizeMode": "contain",
-      "backgroundColor": "black"
+      "backgroundColor": "#000000"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/toss-symbol.png",
+        "backgroundColor": "#202632"
       },
       "permissions": [
         "android.permission.RECORD_AUDIO"
@@ -41,6 +41,12 @@
       "eas": {
         "projectId": "85e7f09d-5163-4943-b097-bfa5cee82b52"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/85e7f09d-5163-4943-b097-bfa5cee82b52"
     }
   }
 }

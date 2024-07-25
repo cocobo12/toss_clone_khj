@@ -153,7 +153,7 @@ export default function App() {
                 screenOptions={{
                   headerShown: false,
                   tabBarStyle: {
-                    height: 50,
+                    height: 60,
                     backgroundColor: Colors.grayComp,
                     borderTopWidth: 1,
                     borderColor: Colors.brightGray,
@@ -170,7 +170,10 @@ export default function App() {
                   tabBarLabelStyle: {
                     fontSize: 11, // 텍스트 크기
                     fontWeight: "bold", // 텍스트 굵기
-                    marginBottom: 6,
+                    marginBottom: 12,
+                  },
+                  tabBarIconStyle: {
+                    marginTop: 2,
                   },
                 }}
               >

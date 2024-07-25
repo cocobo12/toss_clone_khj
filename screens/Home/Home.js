@@ -1,8 +1,6 @@
-import { View, Text, ScrollView, StyleSheet, FlatList } from "react-native";
-import PrimaryButton from "../../components/Button/PrimaryButton";
-import { Colors } from "../../constants/colors";
+import { View, StyleSheet, FlatList } from "react-native";
+
 import Board from "../../components/Board/Board";
-import BankBook from "../../models/BankBook";
 
 import Card from "../../models/Card";
 import MyTrust from "./MyTrust";
@@ -15,7 +13,6 @@ import { fetchCards, fetchPassbook } from "../../util/database";
 //import { BANKBOOK, CARD } from "../../data/dummy-data";
 
 //const DUMMY_LOGO = "C:RN\toss_v2\toss_clone_khjassetsicons\bell-44.svg";
-
 
 function Home() {
   const [loadedPassbooks, setLoadedPassbooks] = useState([]);
@@ -109,13 +106,13 @@ const styles = StyleSheet.create({
   },
   bankContainer: {
     marginVertical: 12,
-    marginHorizontal: 5,
+    marginHorizontal: 12,
   },
   containerMargin: {
     marginBottom: 12,
-    marginHorizontal: 5,
+    marginHorizontal: 12,
   },
   topButton: {
-    marginHorizontal: 5,
+    marginHorizontal: 10,
   },
 });
