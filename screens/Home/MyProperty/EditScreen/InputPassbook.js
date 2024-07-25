@@ -1,9 +1,10 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Switch } from "react-native";
 import InputForm from "../../../../components/Edit/InputForm";
 import InputImage from "./InputImage";
 import { useState } from "react";
 import PrimaryButton from "../../../../components/Button/PrimaryButton";
 import { Colors } from "../../../../constants/colors";
+import { Status } from "../../../../models/enum/Status";
 
 function InputPassbook({ submitHandler }) {
   const [passbook, setPassbook] = useState({
@@ -13,11 +14,24 @@ function InputPassbook({ submitHandler }) {
     title: "",
     buttonText: "",
     image: "",
+    status: Status.ACTIVE,
   });
 
+  const [isEnabled, setIsEnabled] = useState(false);
+
+  const toggleSwitch = () => {
+    setIsEnabled((previousState) => !previousState);
+    setPassbook((prevPassbook) => ({
+      ...prevPassbook,
+      status: isEnabled ? Status.ACTIVE : Status.HIDE,
+    }));
+    console.log("토글테스트: ", isEnabled);
+    console.log("토글테스트: ", passbook.status);
+  };
+
   function valueChangeHandler(column, value) {
-    console.log("인풋값키", column);
-    console.log("인풋값벨류", value);
+    //console.log("인풋값키", column);
+    //console.log("인풋값벨류", value);
 
     setPassbook((prevPassbook) => ({
       ...prevPassbook,
@@ -70,6 +84,16 @@ function InputPassbook({ submitHandler }) {
         column="buttonText"
         value={passbook.buttonText}
       />
+      <View style={styles.toggleButtonContainer}>
+        <Switch
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
+      </View>
+
       <View style={styles.buttonContainer}>
         <PrimaryButton
           color={Colors.analyzeButton}
@@ -94,5 +118,10 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: 10,
     //marginHorizontal: 20,
+  },
+  toggleButtonContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

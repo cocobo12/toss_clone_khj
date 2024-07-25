@@ -17,7 +17,7 @@ function Board({ type, items, button, deleteButton }) {
       />
     );
   } else if (type === "card") {
-    outputItems = <AllCardInfo cards={items} />;
+    outputItems = <AllCardInfo cards={items} deleteButton={deleteButton} />;
   }
 
   return (

@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "PlaceFavorite",
-    "slug": "PlaceFavorite",
+    "name": "TossClone",
+    "slug": "TossClone",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/Toss_App_Icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/favicon.png",
+      "image": "./assets/splash/tossAuthSlash2.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "black"
     },
     "ios": {
       "supportsTablet": true
@@ -18,7 +18,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.brojj.PlaceFavorite"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -32,6 +36,11 @@
       ],
       "expo-font",
       "expo-asset"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "20f0f02c-c90b-4a16-9e9c-29966ee8944d"
+      }
+    }
   }
 }

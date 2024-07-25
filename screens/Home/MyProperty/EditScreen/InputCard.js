@@ -41,28 +41,34 @@ function InputCard({ submitHandler }) {
     <View style={styles.inputOuterContainer}>
       <InputImage column="image" onTakeImage={valueChangeHandler} />
       <InputForm
-        label={"은행명"}
+        label={"카드명"}
         textChangeHandler={valueChangeHandler}
         column="name"
         value={card.name}
-      />
-      <InputForm
-        label={"금액"}
-        textChangeHandler={valueChangeHandler}
-        column="amount"
-        value={card.amount}
-      />
-      <InputForm
-        label={"단위"}
-        textChangeHandler={valueChangeHandler}
-        column="unit"
-        value={card.unit}
       />
       <InputForm
         label={"타이틀"}
         textChangeHandler={valueChangeHandler}
         column="title"
         value={card.title}
+      />
+      <InputForm
+        label={"카드 번호"}
+        textChangeHandler={valueChangeHandler}
+        column="cardNumber"
+        value={card.cardNumber}
+      />
+      <InputForm
+        label={"서브 타이틀"}
+        textChangeHandler={valueChangeHandler}
+        column="subTitle"
+        value={card.subTitle}
+      />
+      <InputForm
+        label={"총 금액"}
+        textChangeHandler={valueChangeHandler}
+        column="total"
+        value={card.total}
       />
       <InputForm
         label={"버튼 텍스트"}

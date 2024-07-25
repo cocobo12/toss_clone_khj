@@ -1,14 +1,27 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import { Colors } from "../../constants/colors";
 import CustomIcons from "../UI/CustomIcons";
 import SilenceButton from "../Button/SilenceButton";
 import { useFonts } from "expo-font";
+import { deleteCard } from "../../util/database";
+import PrimaryButton from "../Button/PrimaryButton";
 
-function CardItem({ card, index, onSelect }) {
+function CardItem({ id, card, index, onSelect, deleteButton }) {
+  console.log(id);
   console.log(card);
   console.log(card.title);
   console.log(card.name);
+  console.log(card.image);
   console.log(index);
+
+  // 계좌 생성 로직 x 생성로직은 하드코딩
+
+  // 계좌 삭제
+  async function deleteCardItem(id) {
+    console.log("삭제 카드 id : ", id);
+    await deleteCard(id);
+    deleteButton();
+  }
 
   const [fontsLoaded] = useFonts({
     Pretendard: require("../../assets/fonts/static/Pretendard-Medium.otf"),
@@ -33,7 +46,13 @@ function CardItem({ card, index, onSelect }) {
           <View style={styles.innerContainer}>
             <View style={styles.iconTitleContainer}>
               <View style={styles.icon}>
-                <CustomIcons name={card.name} />
+                {card.image ? (
+                  <View style={styles.imageContainer}>
+                    <Image style={styles.image} source={{ uri: card.image }} />
+                  </View>
+                ) : (
+                  <CustomIcons name={card.name} />
+                )}
               </View>
               <View style={styles.textContainer}>
                 <Text style={styles.title}>{card.title}</Text>
@@ -46,13 +65,26 @@ function CardItem({ card, index, onSelect }) {
               </View>
             </View>
             <View style={styles.noEffect}>
-              {card.buttonOn ? (
+              {button ? (
                 <SilenceButton
                   color={Colors.noEffectGray}
                   textColor={Colors.buttonTextGray}
                 >
                   {button}
                 </SilenceButton>
+              ) : (
+                ""
+              )}
+              {deleteButton ? (
+                <PrimaryButton
+                  innerStyle={styles.deleteButtonInnerStyle}
+                  gridItem={styles.deleteGridItem}
+                  color="red"
+                  pageHandler={deleteCardItem}
+                  id={id}
+                >
+                  삭제
+                </PrimaryButton>
               ) : (
                 ""
               )}
@@ -126,5 +158,26 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginLeft: -6,
+  },
+  deleteGridItem: {
+    flex: 1,
+    elvation: 4,
+    borderRadius: 12,
+    overflow: "hidden",
+    marginTop: 6,
+  },
+  deleteButtonInnerStyle: {
+    borderRadius: 12,
+    paddingVertical: 7,
+    paddingHorizontal: 14,
+  },
+  imageContainer: {
+    marginLeft: 7,
+    marginRight: 14,
+  },
+  image: {
+    width: 40,
+    height: 40,
+    borderRadius: 75,
   },
 });

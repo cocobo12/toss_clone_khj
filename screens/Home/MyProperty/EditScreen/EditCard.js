@@ -5,6 +5,7 @@ import { useIsFocused } from "@react-navigation/native";
 import Board from "../../../../components/Board/Board";
 import { fetchAllCard, insertCard } from "../../../../util/database";
 import Card from "../../../../models/Card";
+import InputCard from "./InputCard";
 
 function EditCard() {
   const [loadedCards, setLoadedCards] = useState([]);
@@ -44,7 +45,7 @@ function EditCard() {
   useEffect(() => {
     async function loadCards() {
       const cards = await fetchAllCard();
-      console.log("db통장 데이터--------------------------");
+      console.log("db카드 데이터--------------------------");
       console.log(cards.rows._array);
       setLoadedCards(cards.rows._array);
     }
@@ -61,7 +62,7 @@ function EditCard() {
       case "newCard":
         return (
           <View style={styles.itemContainer}>
-            <InputPassbook
+            <InputCard
               key={cardSubmitted ? "submitted" : "new"}
               submitHandler={cardSubmit}
             />

@@ -1,7 +1,7 @@
 import { FlatList, Text, View } from "react-native";
 import CardItem from "./CardItem";
 
-function CardList({ cards }) {
+function CardList({ cards, deleteButton }) {
   if (!cards || cards.length === 0) {
     return (
       <View>
@@ -17,7 +17,7 @@ function CardList({ cards }) {
       data={cards}
       keyExtractor={(item) => item.id}
       renderItem={({ item, index }) => (
-        <CardItem card={item} index={index} onSelect={selectHandler} />
+        <CardItem card={item} index={index} onSelect={selectHandler} deleteButton={deleteButton} id={item.id}/>
       )}
     />
   );

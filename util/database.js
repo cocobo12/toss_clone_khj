@@ -247,6 +247,26 @@ export function insertCard(card) {
   return promise;
 }
 
+export function deleteCard(id) {
+  const promise = new Promise((resolve, reject) => {
+    database.transaction((tx) => {
+      tx.executeSql(
+        `DELETE FROM cards WHERE id = ?`,
+        [id],
+        (_, result) => {
+          console.log("delete 쿼리 성공", result);
+          resolve(result);
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+
+  return promise;
+}
+
 export function fetchCards() {
   const promise = new Promise((resolve, reject) => {
     console.log("페치카드함수");

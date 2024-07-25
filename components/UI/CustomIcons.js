@@ -28,9 +28,9 @@ import PassbookIcon from "../../assets/icons/passbookIcon.svg";
 
 function CustomIcons({ name, width, height }) {
   let icon = (
-    <BellIcon
-      width={width ? width : 24}
-      height={height ? height : 24}
+    <GrayPlus
+      width={width ? width : 50}
+      height={height ? height : 50}
       fill="white"
     />
   );

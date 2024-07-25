@@ -20,14 +20,17 @@ function EditPassbook() {
     if (passbookSubmitted) {
       return; // 이미 제출된 경우 함수 종료
     }
+    console.log("------------------------------------");
     console.log("계좌 서밋 데이터 : ", passbook);
+    console.log("------------------------------------");
     const bankbookItem = new BankBook(
       passbook.name,
       passbook.title,
       passbook.unit,
       passbook.amount,
       passbook.buttonText,
-      passbook.image
+      passbook.image,
+      passbook.status
     );
 
     // BankBookItem()함수 이용 x 그냥 하드코딩으로 처리

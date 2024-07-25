@@ -3,12 +3,13 @@ import CardList from "../../components/Cards/CardList";
 
 import { Colors } from "../../constants/colors";
 
-function AllCardInfo({ cards }) {
+function AllCardInfo({ cards, deleteButton }) {
+
   const arrow = " 〉";
 
   return (
     <View style={styles.outerContainer}>
-      <CardList cards={cards} />
+      <CardList cards={cards} deleteButton={deleteButton}/>
     </View>
   );
 }
