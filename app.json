@@ -22,7 +22,7 @@
       "permissions": [
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.brojj.PlaceFavorite"
+      "package": "com.brojj.tossClone"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -39,7 +39,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "20f0f02c-c90b-4a16-9e9c-29966ee8944d"
+        "projectId": "85e7f09d-5163-4943-b097-bfa5cee82b52"
       }
     }
   }
