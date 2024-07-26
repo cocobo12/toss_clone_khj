@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     paddingTop: 0,
   },
   buttonContainer: {
+    //flex: 1,
     paddingLeft: 6,
     paddingRight: 10,
     paddingTop: 1,
