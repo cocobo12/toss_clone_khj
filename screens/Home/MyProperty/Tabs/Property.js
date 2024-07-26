@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import TotalProperty from "../../../../components/PropertyComponents/TotalProperty";
 import PassBookTotal from "../../../../components/PropertyComponents/PassBookTotal";
 import { Colors } from "../../../../constants/colors";

@@ -1,10 +1,10 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import BankBookList from "../../components/Banks/BankBookList";
 import PrimaryButton from "../../components/Button/PrimaryButton";
 import { Colors } from "../../constants/colors";
 import { useNavigation } from "@react-navigation/native";
 
-function AllBankBooks({ bankbooks }) {
+function AllBankBooks({ bankbooks, button, deleteButton }) {
   const navigation = useNavigation();
 
   const arrow = " 〉";
@@ -17,16 +17,22 @@ function AllBankBooks({ bankbooks }) {
 
   return (
     <View style={styles.outerContainer}>
-      <BankBookList bankbooks={bankbooks} />
-      <View style={styles.line}>
-        <PrimaryButton
-          textColor={Colors.buttonTextGray}
-          innerStyle={styles.innerStyle}
-          pageHandler={pageHandler}
-        >
-          내 계좌 · 대출 · 증권 · 포인트 보기 {arrow}
-        </PrimaryButton>
-      </View>
+      <BankBookList bankbooks={bankbooks} deleteButton={deleteButton}/>
+      {button === false ? (
+        <View>
+          <Text></Text>
+        </View>
+      ) : (
+        <View style={styles.line}>
+          <PrimaryButton
+            textColor={Colors.buttonTextGray}
+            innerStyle={styles.innerStyle}
+            pageHandler={pageHandler}
+          >
+            내 계좌 · 대출 · 증권 · 포인트 보기 {arrow}
+          </PrimaryButton>
+        </View>
+      )}
     </View>
   );
 }

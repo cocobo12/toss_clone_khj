@@ -2,8 +2,8 @@ import { View, Text, Pressable, StyleSheet } from "react-native";
 import { Colors } from "../../constants/colors";
 import { useFonts } from "expo-font";
 
-
 function PrimaryButton({
+  id,
   children,
   color,
   textColor,
@@ -13,6 +13,7 @@ function PrimaryButton({
   gridItem,
   buttonText,
 }) {
+  console.log("버튼에 넘어온 id", id);
 
   const [fontsLoaded] = useFonts({
     Pretendard: require("../../assets/fonts/static/Pretendard-Medium.otf"),
@@ -22,6 +23,10 @@ function PrimaryButton({
   function pressHandler() {
     console.log("Pressed!");
   }
+
+  function outerHandler() {
+    pageHandler(id ? id : "");
+  }
   return (
     <View
       style={[
@@ -30,7 +35,7 @@ function PrimaryButton({
       ]}
     >
       <Pressable
-        onPress={pageHandler ? pageHandler : pressHandler}
+        onPress={pageHandler ? outerHandler : pressHandler}
         android_ripple={{ color: Colors.pressedGray, borderless: false }}
         style={({ pressed }) => [
           styles.button,

@@ -5,13 +5,19 @@ import AllCardInfo from "../../screens/Home/AllCardInfo";
 import { View, Text, StyleSheet } from "react-native";
 import { Colors } from "../../constants/colors";
 
-function Board({ type, items }) {
+function Board({ type, items, button, deleteButton }) {
   console.log(type);
   let outputItems;
   if (type === "bankbook") {
-    outputItems = <AllBankBooks bankbooks={items} />;
+    outputItems = (
+      <AllBankBooks
+        bankbooks={items}
+        button={button}
+        deleteButton={deleteButton}
+      />
+    );
   } else if (type === "card") {
-    outputItems = <AllCardInfo cards={items} />;
+    outputItems = <AllCardInfo cards={items} deleteButton={deleteButton} />;
   }
 
   return (

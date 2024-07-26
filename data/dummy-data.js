@@ -16,13 +16,14 @@ export const BANKBOOK = [
   new BankBook("우체국", "저축예금", "원", "50,000,000", "송금"),
   new BankBook("토스증권", "증권 · 토스증권 계좌", "원", "0", "송금"),
   new BankBook("기타자산", "기타 자산", "", "잔액 보기"),
-  new BankBook("농협", "자유저축예탁금", "원", "252", "송금", "HIDE"),
+  new BankBook("농협", "자유저축예탁금", "원", "252", "송금", "", "HIDE"),
   new BankBook(
     "농협",
     "NH주거래우대통장(비대면실명확인)",
     "원",
     "960",
     "송금",
+    "",
     Status.HIDE
   ),
 ];

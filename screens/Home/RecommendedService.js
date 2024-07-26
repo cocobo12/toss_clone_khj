@@ -20,7 +20,7 @@ function RecommendedService() {
           <View style={styles.button}>
             <RecommendButton
               color={Colors.recommendText}
-              icon="내대출"
+              icon="대출찾기"
               secondLine="찾기"
             >
               내게 맞는 대출

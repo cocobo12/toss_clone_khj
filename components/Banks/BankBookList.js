@@ -1,7 +1,7 @@
 import { FlatList, Text, View } from "react-native";
 import BankBookItem from "./BankBookItem";
 
-function BankBookList({ bankbooks }) {
+function BankBookList({ bankbooks, deleteButton }) {
   console.log("뱅크북리스트로넘어옴");
   console.log(bankbooks);
   if (!bankbooks || bankbooks.length === 0) {
@@ -19,7 +19,8 @@ function BankBookList({ bankbooks }) {
       data={bankbooks}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
-        <BankBookItem bankbook={item} onSelect={selectHandler} />
+
+        <BankBookItem bankbook={item} onSelect={selectHandler} deleteButton={deleteButton} id={item.id}/>
       )}
     />
   );

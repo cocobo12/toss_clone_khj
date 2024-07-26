@@ -1,24 +1,28 @@
 {
   "expo": {
-    "name": "PlaceFavorite",
-    "slug": "PlaceFavorite",
+    "name": "토스",
+    "slug": "TossClone",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/tossicon3.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/favicon.png",
+      "image": "./assets/splash/tossAuthSlash2.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/tossicon3.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.brojj.tossClone"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -31,7 +35,19 @@
         }
       ],
       "expo-font",
-      "expo-asset"
-    ]
+      "expo-asset",
+      "3rd-party-native-module"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "85e7f09d-5163-4943-b097-bfa5cee82b52"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/85e7f09d-5163-4943-b097-bfa5cee82b52"
+    }
   }
 }

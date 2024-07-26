@@ -9,7 +9,7 @@ import { StyleSheet, Alert, Button, Image, View, Text } from "react-native";
 import { Colors } from "../../constants/colors";
 import OulineButton from "../UI/OutlinedButton";
 
-function ImagePicker({onTakeImage}) {
+function ImagePicker({ column, onTakeImage }) {
   const [pickedImage, setPickedImage] = useState();
 
   const [cameraPermissionInformation, requestPermission] =
@@ -23,11 +23,15 @@ function ImagePicker({onTakeImage}) {
     }
 
     if (cameraPermissionInformation.status === PermissionStatus.DENIED) {
-      Alert.alert(
-        "Insufficient Permissions!",
-        "You need to grant camera permissions to use this app."
-      );
-      return false;
+      const permissionResponse = await requestPermission();
+
+      if (!permissionResponse.granted) {
+        Alert.alert(
+          "Insufficient Permissions!",
+          "You need to grant camera permissions to use this app."
+        );
+        return false;
+      }
     }
     return true;
   }
@@ -42,15 +46,15 @@ function ImagePicker({onTakeImage}) {
 
     const image = await launchCameraAsync({
       allowsEditing: true,
-      aspect: [16, 9],
+      aspect: [1, 1],
       quality: 0.5,
     });
 
     console.log(image);
     console.log(image.assets);
-    console.log(image.assets[0].uri);
+    console.log("이미지 uri : ", image.assets[0].uri);
     setPickedImage(image.assets[0].uri);
-    onTakeImage(image.assets[0].uri);
+    onTakeImage(column, image.assets[0].uri);
   }
 
   let imagePreview = <Text>No image taken yet.</Text>;
@@ -65,7 +69,11 @@ function ImagePicker({onTakeImage}) {
   return (
     <View>
       <View style={styles.imagePreview}>{imagePreview}</View>
-      <OulineButton onPress={takeImageHandler}>Take Image</OulineButton>
+      <View style={styles.buttonContainer}>
+        <OulineButton onPress={takeImageHandler}>
+          아이콘 이미지 촬영
+        </OulineButton>
+      </View>
     </View>
   );
 }
@@ -74,16 +82,22 @@ export default ImagePicker;
 
 const styles = StyleSheet.create({
   imagePreview: {
-    width: "100%",
-    height: 200,
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    marginLeft: 80,
     marginVertical: 8,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: Colors.primary100,
-    borderRadius: 4,
+    overflow: "hidden",
   },
   image: {
-    width: "100%",
-    height: "100%",
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+  },
+  buttonContainer: {
+    marginHorizontal: 40,
   },
 });

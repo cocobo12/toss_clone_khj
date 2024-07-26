@@ -1,18 +1,31 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View, Image} from "react-native";
 import { useFonts } from "expo-font";
 
 import { Colors } from "../../constants/colors";
 import CustomIcons from "../UI/CustomIcons";
 import SilenceButton from "../Button/SilenceButton";
+import PrimaryButton from "../Button/PrimaryButton";
+import { deletePassbook } from "../../util/database";
 
-function BankBookItem({ bankbook, onSelect }) {
+function BankBookItem({ id, bankbook, onSelect, deleteButton }) {
   console.log(bankbook);
   console.log(bankbook.title);
   console.log(bankbook.name);
   console.log(bankbook.subTitle);
   console.log(bankbook.buttonOn);
   console.log(bankbook.status);
+  console.log(bankbook.image);
 
+  // 계좌 생성 로직 x 생성로직은 하드코딩
+
+  // 계좌 삭제
+  async function deletePassbookItem(id) {
+    console.log("삭제 계좌 id : ", id);
+    await deletePassbook(id);
+    deleteButton();
+  }
+
+  // 폰트
   const [fontsLoaded] = useFonts({
     Pretendard: require("../../assets/fonts/static/Pretendard-Medium.otf"),
   });
@@ -24,8 +37,6 @@ function BankBookItem({ bankbook, onSelect }) {
   if (bankbook.buttonOn) {
     button = bankbook.buttonOn;
   }
-
-
 
   return (
     <View style={styles.outerContainer}>
@@ -40,7 +51,13 @@ function BankBookItem({ bankbook, onSelect }) {
         <View style={styles.innerContainer}>
           <View style={styles.iconTitleContainer}>
             <View style={styles.icon}>
-              <CustomIcons name={bankbook.name} />
+              {bankbook.image ? (
+                <View style={styles.imageContainer}>
+                  <Image style={styles.image} source={{ uri: bankbook.image}}/>
+                </View>
+              ) : (
+                <CustomIcons name={bankbook.name} />
+              )}
             </View>
             <View style={styles.textContainer}>
               <Text style={styles.title}>{bankbook.title}</Text>
@@ -60,6 +77,19 @@ function BankBookItem({ bankbook, onSelect }) {
               >
                 {button}
               </SilenceButton>
+            ) : (
+              ""
+            )}
+            {deleteButton ? (
+              <PrimaryButton
+                innerStyle={styles.deleteButtonInnerStyle}
+                gridItem={styles.deleteGridItem}
+                color="red"
+                pageHandler={deletePassbookItem}
+                id={id}
+              >
+                삭제
+              </PrimaryButton>
             ) : (
               ""
             )}
@@ -122,5 +152,26 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginLeft: -6,
+  },
+  deleteGridItem: {
+    flex: 1,
+    elvation: 4,
+    borderRadius: 12,
+    overflow: "hidden",
+    marginTop: 6,
+  },
+  deleteButtonInnerStyle: {
+    borderRadius: 12,
+    paddingVertical: 7,
+    paddingHorizontal: 14,
+  },
+  imageContainer: {
+    marginLeft: 7,
+    marginRight: 14,
+  },
+  image: {
+    width: 40,
+    height: 40,
+    borderRadius: 75,
   },
 });

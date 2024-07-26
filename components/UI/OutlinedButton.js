@@ -23,7 +23,7 @@ export default OulineButton;
 
 const styles = StyleSheet.create({
   button: {
-    paddingHorizontal: 12,
+    paddingHorizontal: 8,
     paddingVertical: 6,
     margin: 4,
     flexDirection: "row",
