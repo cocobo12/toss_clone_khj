@@ -2,107 +2,113 @@ import * as SQLite from "expo-sqlite/legacy";
 
 const database = SQLite.openDatabase("tossd.db");
 
+// 테스트용 init
+
+// export function init() {
+//   const promise = new Promise((resolve, reject) => {
+//     database.transaction((tx) => {
+//       // passbooks 테이블 초기화
+//       tx.executeSql(
+//         `DROP TABLE IF EXISTS passbooks;`,
+//         [],
+//         () => {
+//           // passbooks 테이블 생성
+//           tx.executeSql(
+//             `CREATE TABLE IF NOT EXISTS passbooks (
+//               id INTEGER PRIMARY KEY AUTOINCREMENT,
+//               name TEXT NOT NULL,
+//               title TEXT,
+//               subTitle TEXT,
+//               total TEXT,
+//               buttonOn TEXT,
+//               status VARCHAR(10) DEFAULT 'ACTIVE',
+//               image TEXT
+//             );`,
+//             [],
+//             () => {
+//               // cards 테이블 초기화
+//               tx.executeSql(
+//                 `DROP TABLE IF EXISTS cards;`,
+//                 [],
+//                 () => {
+//                   // cards 테이블 생성
+//                   tx.executeSql(
+//                     `CREATE TABLE IF NOT EXISTS cards (
+//                       id INTEGER PRIMARY KEY AUTOINCREMENT,
+//                       name TEXT,
+//                       title TEXT,
+//                       cardNumber TEXT,
+//                       subTitle TEXT,
+//                       total TEXT,
+//                       buttonOn TEXT,
+//                       status VARCHAR(10) DEFAULT 'ACTIVE',
+//                       image TEXT
+//                     );`,
+//                     [],
+//                     () => {
+//                       // stocks 테이블 초기화
+//                       tx.executeSql(
+//                         `DROP TABLE IF EXISTS stocks;`,
+//                         [],
+//                         () => {
+//                           // stocks 테이블 생성
+//                           tx.executeSql(
+//                             `CREATE TABLE IF NOT EXISTS stocks (
+//                               id INTEGER PRIMARY KEY AUTOINCREMENT,
+//                               name TEXT,
+//                               title TEXT,
+//                               quantity INTEGER,
+//                               currentPrice REAL,
+//                               subTitle TEXT,
+//                               total TEXT,
+//                               buttonOn TEXT,
+//                               status VARCHAR(10) DEFAULT 'ACTIVE',
+//                               image TEXT
+//                             );`,
+//                             [],
+//                             () => {
+//                               resolve();
+//                             },
+//                             (_, error) => {
+//                               reject(error);
+//                             }
+//                           );
+//                         },
+//                         (_, error) => {
+//                           reject(error);
+//                         }
+//                       );
+//                     },
+//                     (_, error) => {
+//                       reject(error);
+//                     }
+//                   );
+//                 },
+//                 (_, error) => {
+//                   reject(error);
+//                 }
+//               );
+//             },
+//             (_, error) => {
+//               reject(error);
+//             }
+//           );
+//         },
+//         (_, error) => {
+//           reject(error);
+//         }
+//       );
+//     });
+//   });
+
+//   return promise;
+// }
+
+//////////////////////////////////////////////////////////
+
+// 배포용 init
+
 export function init() {
-  const promise = new Promise((resolve, reject) => {
-    database.transaction((tx) => {
-      // passbooks 테이블 초기화
-      tx.executeSql(
-        `DROP TABLE IF EXISTS passbooks;`,
-        [],
-        () => {
-          // passbooks 테이블 생성
-          tx.executeSql(
-            `CREATE TABLE IF NOT EXISTS passbooks (
-              id INTEGER PRIMARY KEY AUTOINCREMENT,
-              name TEXT NOT NULL,
-              title TEXT,
-              subTitle TEXT,
-              total TEXT,
-              buttonOn TEXT,
-              status VARCHAR(10) DEFAULT 'ACTIVE',
-              image TEXT
-            );`,
-            [],
-            () => {
-              // cards 테이블 초기화
-              tx.executeSql(
-                `DROP TABLE IF EXISTS cards;`,
-                [],
-                () => {
-                  // cards 테이블 생성
-                  tx.executeSql(
-                    `CREATE TABLE IF NOT EXISTS cards (
-                      id INTEGER PRIMARY KEY AUTOINCREMENT,
-                      name TEXT,
-                      title TEXT,
-                      cardNumber TEXT,
-                      subTitle TEXT,
-                      total TEXT,
-                      buttonOn TEXT,
-                      status VARCHAR(10) DEFAULT 'ACTIVE',
-                      image TEXT
-                    );`,
-                    [],
-                    () => {
-                      // stocks 테이블 초기화
-                      tx.executeSql(
-                        `DROP TABLE IF EXISTS stocks;`,
-                        [],
-                        () => {
-                          // stocks 테이블 생성
-                          tx.executeSql(
-                            `CREATE TABLE IF NOT EXISTS stocks (
-                              id INTEGER PRIMARY KEY AUTOINCREMENT,
-                              name TEXT,
-                              title TEXT,
-                              quantity INTEGER,
-                              currentPrice REAL,
-                              subTitle TEXT,
-                              total TEXT,
-                              buttonOn TEXT,
-                              status VARCHAR(10) DEFAULT 'ACTIVE',
-                              image TEXT
-                            );`,
-                            [],
-                            () => {
-                              resolve();
-                            },
-                            (_, error) => {
-                              reject(error);
-                            }
-                          );
-                        },
-                        (_, error) => {
-                          reject(error);
-                        }
-                      );
-                    },
-                    (_, error) => {
-                      reject(error);
-                    }
-                  );
-                },
-                (_, error) => {
-                  reject(error);
-                }
-              );
-            },
-            (_, error) => {
-              reject(error);
-            }
-          );
-        },
-        (_, error) => {
-          reject(error);
-        }
-      );
-    });
-  });
-
-  return promise;
-}
-
-/* export function init() {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       // passbooks 테이블 생성
@@ -171,8 +177,6 @@ export function init() {
 
   return promise;
 }
- */
-
 
 export function insertPassbook(passbook) {
   const promise = new Promise((resolve, reject) => {
@@ -459,6 +463,3 @@ export function fetchStocks() {
 
   return promise;
 }
-
-
-
