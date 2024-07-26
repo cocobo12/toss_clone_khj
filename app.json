@@ -35,8 +35,7 @@
         }
       ],
       "expo-font",
-      "expo-asset",
-      "3rd-party-native-module"
+      "expo-asset"
     ],
     "extra": {
       "eas": {
@@ -51,3 +50,4 @@
     }
   }
 }
+  
