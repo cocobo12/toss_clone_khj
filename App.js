@@ -120,18 +120,22 @@ function MainPage() {
 export default function App() {
   const [dbInitialized, setDbInitialized] = useState(false);
 
+  const [dataInitialized, setDataInitialized] = useState(false);
+
   useEffect(() => {
     init()
       .then(() => {
         setDbInitialized(true);
-        initializeData();
+        initializeData().then(() => {
+          setDataInitialized(true);
+        });
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  if (!dbInitialized) {
+  useEffect(() => {
     const prepare = async () => {
       try {
         // Keep the splash screen visible while we fetch resources
@@ -146,7 +150,13 @@ export default function App() {
       }
     };
 
-    prepare();
+    if (dbInitialized && dataInitialized) {
+      prepare();
+    }
+  }, [dbInitialized, dataInitialized]);
+
+  if (!dbInitialized || !dataInitialized) {
+    return null; // 스플래시 화면을 유지합니다.
   }
 
   return (

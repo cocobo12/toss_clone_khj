@@ -1,7 +1,12 @@
 import BankBook from "../models/BankBook";
 import Card from "../models/Card";
 import { Status } from "../models/enum/Status";
-import { insertCard, insertPassbook } from "../util/database";
+import {
+  fetchAllCard,
+  fetchAllPassbook,
+  insertCard,
+  insertPassbook,
+} from "../util/database";
 
 export const BANKBOOK = [
   new BankBook("토스뱅크 통장", "토스뱅크 통장", "원", "238,001", "송금"),
@@ -58,13 +63,25 @@ export const CARD = [
 ];
 
 export default async function initializeData() {
-  for (let i = 0; i < BANKBOOK.length; i++) {
-    console.log(BANKBOOK[i]);
-    await insertPassbook(BANKBOOK[i]);
+  const passbooks = await fetchAllPassbook();
+  const cards = await fetchAllCard();
+  console.log("초기화---------------------------------------");
+  console.log("초기화---------------------------------------");
+  console.log("초기화---------------------------------------");
+  console.log(passbooks);
+  console.log(cards);
+
+  if (passbooks.rows.length === 0) {
+    for (let i = 0; i < BANKBOOK.length; i++) {
+      console.log(BANKBOOK[i]);
+      await insertPassbook(BANKBOOK[i]);
+    }
   }
 
-  for (let i = 0; i < CARD.length; i++) {
-    console.log("카드 초기 데이터 삽입 : ", CARD[i]);
-    await insertCard(CARD[i]);
+  if (cards.rows.length === 0) {
+    for (let i = 0; i < CARD.length; i++) {
+      console.log("카드 초기 데이터 삽입 : ", CARD[i]);
+      await insertCard(CARD[i]);
+    }
   }
 }

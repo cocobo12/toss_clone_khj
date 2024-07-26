@@ -4,7 +4,7 @@
     "slug": "TossClone",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/tossicon3.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash/tossAuthSlash2.png",
@@ -16,8 +16,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/tossicon3.png",
-        "backgroundColor": "#000000"
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#202632"
       },
       "permissions": [
         "android.permission.RECORD_AUDIO"
