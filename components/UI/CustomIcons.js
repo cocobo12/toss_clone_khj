@@ -25,6 +25,7 @@ import SmileCashe from "../../assets/icons/smilePoint.svg";
 import SinPoint from "../../assets/icons/sinpoint.svg";
 import BluePlus from "../../assets/icons/bluePlus.svg";
 import PassbookIcon from "../../assets/icons/passbookIcon.svg";
+import KbIcon from "../../assets/icons/kbicon.svg";
 
 function CustomIcons({ name, width, height }) {
   let icon = (
@@ -137,6 +138,8 @@ function CustomIcons({ name, width, height }) {
     icon = (
       <PassbookIcon width={width ? width : 50} height={height ? height : 50} />
     );
+  } else if (name === "국민은행") {
+    icon = <KbIcon width={width ? width : 50} height={height ? height : 50} />;
   }
 
   return <View style={styles.icon}>{icon}</View>;

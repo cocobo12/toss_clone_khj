@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import { useFonts } from "expo-font";
 
 import { Colors } from "../../constants/colors";
@@ -12,6 +12,7 @@ function Item({ item, totalStyle, onSelect, buttonText, arrow }) {
   console.log(item.subTitle);
   console.log(item.total);
   console.log(item.buttonOn);
+  console.log(item.image);
 
   const [fontsLoaded] = useFonts({
     Pretendard: require("../../assets/fonts/static/Pretendard-Medium.otf"),
@@ -38,7 +39,13 @@ function Item({ item, totalStyle, onSelect, buttonText, arrow }) {
         <View style={styles.innerContainer}>
           <View style={styles.iconTitleContainer}>
             <View style={styles.icon}>
-              <CustomIcons name={item.name} />
+              {item.image ? (
+                <View style={styles.imageContainer}>
+                  <Image style={styles.image} source={{ uri: item.image }} />
+                </View>
+              ) : (
+                <CustomIcons name={item.name} />
+              )}
             </View>
             <View style={styles.textContainer}>
               {item.total ? (
@@ -149,5 +156,14 @@ const styles = StyleSheet.create({
   },
   arrow: {
     color: "white",
+  },
+  imageContainer: {
+    marginLeft: 7,
+    marginRight: 14,
+  },
+  image: {
+    width: 40,
+    height: 40,
+    borderRadius: 75,
   },
 });

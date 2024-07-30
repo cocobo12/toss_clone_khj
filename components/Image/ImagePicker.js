@@ -1,10 +1,11 @@
 import {
+  launchImageLibraryAsync,
   launchCameraAsync,
   useCameraPermissions,
   PermissionStatus,
 } from "expo-image-picker";
-import { useEffect, useState } from "react";
-import { StyleSheet, Alert, Button, Image, View, Text } from "react-native";
+import { useState } from "react";
+import { StyleSheet, Alert, Image, View, Text } from "react-native";
 
 import { Colors } from "../../constants/colors";
 import OulineButton from "../UI/OutlinedButton";
@@ -66,12 +67,29 @@ function ImagePicker({ column, onTakeImage }) {
     imagePreview = <Image style={styles.image} source={{ uri: pickedImage }} />;
   }
 
+  async function pickImageHandler() {
+    const image = await launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.5,
+    });
+
+    if (!image.canceled) {
+      console.log("이미지 라이브러리 :", image);
+      setPickedImage(image.assets[0].uri);
+      onTakeImage(column, image.assets[0].uri);
+    }
+  }
+
   return (
     <View>
       <View style={styles.imagePreview}>{imagePreview}</View>
       <View style={styles.buttonContainer}>
         <OulineButton onPress={takeImageHandler}>
           아이콘 이미지 촬영
+        </OulineButton>
+        <OulineButton onPress={pickImageHandler}>
+          라이브러리에서 선택
         </OulineButton>
       </View>
     </View>

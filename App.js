@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -119,25 +120,43 @@ function MainPage() {
 export default function App() {
   const [dbInitialized, setDbInitialized] = useState(false);
 
+  const [dataInitialized, setDataInitialized] = useState(false);
+
   useEffect(() => {
     init()
       .then(() => {
         setDbInitialized(true);
-        initializeData();
+        initializeData().then(() => {
+          setDataInitialized(true);
+        });
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  if (!dbInitialized) {
+  useEffect(() => {
     const prepare = async () => {
-      await SplashScreen.preventAutoHideAsync();
-      // Pre-load stuff, if needed
-      await SplashScreen.hideAsync();
+      try {
+        // Keep the splash screen visible while we fetch resources
+        await SplashScreen.preventAutoHideAsync();
+        // Artificially delay for two seconds to simulate a slow loading experience.
+        await new Promise((resolve) => setTimeout(resolve, 1200));
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        // Tell the application to render
+        await SplashScreen.hideAsync();
+      }
     };
 
-    prepare();
+    if (dbInitialized && dataInitialized) {
+      prepare();
+    }
+  }, [dbInitialized, dataInitialized]);
+
+  if (!dbInitialized || !dataInitialized) {
+    return null; // 스플래시 화면을 유지합니다.
   }
 
   return (

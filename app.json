@@ -4,7 +4,7 @@
     "slug": "TossClone",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/tossicon3.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash/tossAuthSlash2.png",
@@ -16,8 +16,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/tossicon3.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#202632"
       },
       "permissions": [
         "android.permission.RECORD_AUDIO"
@@ -35,8 +35,7 @@
         }
       ],
       "expo-font",
-      "expo-asset",
-      "3rd-party-native-module"
+      "expo-asset"
     ],
     "extra": {
       "eas": {
@@ -51,3 +50,4 @@
     }
   }
 }
+  
