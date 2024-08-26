@@ -19,7 +19,7 @@ React Native 토스앱 클론 코딩
 
 ## 🖥️ 프로젝트 소개
 토스앱 홈화면, 계좌 상세페이지 화면을 동일한 UI형태로 만든 앱
-결과물 배포 앱 - <a href="https://web--bro-store.netlify.app/" > 배포 사이트 - 이동</a>
+결과물 배포 앱 - <a href="https://web--bro-store.netlify.app/" > 배포 앱 - 설치</a>
 
 ## 👪개발인원
 - 김형준(개인프로젝트)
@@ -31,14 +31,12 @@ React Native 토스앱 클론 코딩
 * 24.07.01일 - 24.07.29일
 
 ### ⚙️ 개발 환경
-- `nodeJs`
-- `Expo-CLI`
+- `nodeJs v21.7.2`
+- `Expo-CLI ~51.0.22`
 - **IDE** : VS code
-- **Framework** : React Native(2.7.13)
-- **Database** : Maria DB(3.0.1)
-- **ORM** : JPA
-- **배포** : aws ec2  <a href="https://github.com/gamjagogi/BroStore/wiki/%EB%B0%B0%ED%8F%AC-%EA%B3%BC%EC%A0%95(Deployment)" >상세 정보 - WIKI 이동</a>
-- **이미지 처리** : aws s3
+- **Framework** : React Native(0.74.3)
+- **Database** : Expo Sqlite(~14.0.5)
+- **배포** : apk <a href="https://web--bro-store.netlify.app/" > 배포 앱 - 설치</a>
 
 
 ## 📌 주요 기능
