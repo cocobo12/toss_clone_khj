@@ -6,12 +6,12 @@ React Native 토스앱 클론 코딩
 
 <br>
 
-<a href="https://web--bro-store.netlify.app/" > 결과물 배포 사이트 - 이동</a>
+<a href="https://file.kiwi/f559240c#3wQHEogSFhhpBr8reWG11A" > 결과물 배포 사이트 - 이동</a>
 
 <br>
 
-## 유저 게시판
-![ezgif-4-3bbd0ffaec](https://github.com/gamjagogi/BroStore/assets/110292164/85b5fe32-cf07-4bd7-aef7-9e2fd12904db)
+## 앱 구동 모습
+![KakaoTalk_Video_2024-08-26-19-17-58 (2)](https://github.com/user-attachments/assets/9d3da32d-1c59-403e-adb7-3697b66aac8e)
 
 </details>
 
