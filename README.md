@@ -6,7 +6,7 @@ React Native 토스앱 클론 코딩
 
 <br>
 
-<a href="https://file.kiwi/f559240c#3wQHEogSFhhpBr8reWG11A" > 결과물 배포 앱 - 설치</a>
+<a href="https://drive.google.com/file/d/1daxqTPibvs2CDps1R1M297O1e1F_pU-w/view?usp=sharing" type="application/vnd.android.package-archive" target="_blank">결과물 배포 앱 - 설치</a>
 
 <br>
 
